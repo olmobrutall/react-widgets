@@ -1,5 +1,5 @@
 import { mount } from 'enzyme'
-import React from 'react'
+import * as React from 'react'
 import Combobox from '../src/Combobox'
 
 describe('Combobox', function () {
@@ -11,7 +11,7 @@ describe('Combobox', function () {
   ]
 
   it('should set initial values', function () {
-    mount(<Combobox value={'hello'} onChange={() => {}} />)
+    mount(<Combobox value={'hello'} onChange={() => { }} />)
       .find('input.rw-input')
       .tap((c) => expect(c.getDOMNode().value).to.equal('hello'))
   })
@@ -169,7 +169,7 @@ describe('Combobox', function () {
         value="bar"
         data={dataList}
         onChange={change}
-        onToggle={() => {}}
+        onToggle={() => { }}
       />,
     )
       .find('List')

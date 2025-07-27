@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { Combobox, DropdownList, Multiselect, Listbox } from 'react-widgets'
 import generateData from '../generate-data'
 

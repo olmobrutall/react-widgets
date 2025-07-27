@@ -2,7 +2,7 @@ import { RefObject, useEffect } from 'react'
 
 export default function useAutoFocus(
   autoFocus: boolean,
-  ref: RefObject<HTMLElement>,
+  ref: RefObject<HTMLElement | null>,
 ) {
   useEffect(() => {
     if (autoFocus && ref.current) ref.current.focus()

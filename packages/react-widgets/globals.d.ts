@@ -5,12 +5,6 @@ type FilterFlags<Base, Condition> = {
 }
 type AllowedNames<Base, Condition> = FilterFlags<Base, Condition>[keyof Base]
 
-declare namespace Intl {
-  interface DateTimeFormatOptions {
-    dateStyle?: 'short' | 'medium' | 'full'
-    timeStyle?: 'short' | 'medium' | 'full'
-  }
-}
 
 declare module 'date-arithmetic' {
   export type DateUnit =
@@ -124,14 +118,4 @@ declare module 'date-arithmetic' {
     date2?: Date | null | number,
     unit?: DateUnit,
   ): boolean
-}
-
-declare module 'prop-types-extra/lib/elementType'
-
-declare module 'prop-types-extra/lib/utils/createChainableTypeChecker' {
-  import * as PropTypes from 'prop-types'
-
-  export default function createChainableTypeChecker<T>(
-    props: PropTypes.Validator<T>,
-  ): PropTypes.Validator<T>
 }

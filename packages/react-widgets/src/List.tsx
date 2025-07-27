@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import cn from 'classnames'
-import PropTypes from 'prop-types'
-import React, {
+import * as React from 'react'
+import {
   useCallback,
   useImperativeHandle,
   useMemo,
@@ -12,7 +12,6 @@ import ListOptionGroup from './ListOptionGroup'
 import { UserProvidedMessages, useMessagesWithDefaults } from './messages'
 // import { WidgetHTMLProps } from './shared'
 import { DataItem, RenderProp, Value } from './types'
-import * as CustomPropTypes from './PropTypes'
 import { groupBySortedKeys, makeArray, toItemArray } from './_'
 import { Accessors } from './Accessors'
 import { useInstanceId } from './WidgetHelpers'
@@ -34,7 +33,7 @@ const whitelist = [
 
 const whitelistRegex = [/^aria-/, /^data-/, /^on[A-Z]\w+/]
 
-function pickElementProps<T>(props: T): Partial<T> {
+function pickElementProps<T extends object>(props: T): Partial<T> {
   const result: Partial<T> = {}
   Object.keys(props).forEach((key) => {
     if (
@@ -45,31 +44,6 @@ function pickElementProps<T>(props: T): Partial<T> {
   })
 
   return result
-}
-
-const propTypes = {
-  data: PropTypes.array,
-
-  dataKey: CustomPropTypes.accessor,
-  textField: CustomPropTypes.accessor,
-
-  onSelect: PropTypes.func,
-  onMove: PropTypes.func,
-  onHoverOption: PropTypes.func,
-
-  optionComponent: PropTypes.elementType,
-  renderItem: PropTypes.func,
-  renderGroup: PropTypes.func,
-
-  focusedItem: PropTypes.any,
-  selectedItem: PropTypes.any,
-  searchTerm: PropTypes.string,
-
-  disabled: CustomPropTypes.disabled.acceptsArray,
-
-  messages: PropTypes.shape({
-    emptyList: PropTypes.func.isRequired,
-  }),
 }
 
 export type GroupBy<TDataItem = unknown> =
@@ -119,18 +93,10 @@ export interface ListProps<TDataItem> {
   searchTerm?: string
   groupBy?: GroupBy<TDataItem>
   optionComponent?: React.ElementType
-  onChange: ChangeHandler<TDataItem>
-  elementRef?: MutableRefObject<HTMLDivElement | null>
+  onChange: ChangeHandler<TDataItem>;
+  ref?: React.Ref<ListHandle>,
+  elementRef?: React.RefObject<HTMLDivElement | null>
   [key: string]: any
-}
-
-declare interface List {
-  <TDataItem = DataItem>(
-    props: ListProps<TDataItem> & React.RefAttributes<ListHandle>,
-  ): React.ReactElement | null
-
-  displayName?: string
-  propTypes?: any
 }
 
 export const useScrollFocusedIntoView = (
@@ -190,7 +156,7 @@ export function useHandleSelect<TDataItem>(
   }
 }
 
-const List: List = React.forwardRef(function List<TDataItem>(
+function List<TDataItem>(
   {
     multiple = false,
     data = [],
@@ -209,10 +175,10 @@ const List: List = React.forwardRef(function List<TDataItem>(
     elementRef,
     optionComponent: Option = ListOption,
     renderList,
+    ref: outerRef,
     // onKeyDown,
     ...props
   }: ListProps<TDataItem>,
-  outerRef: React.Ref<ListHandle>,
 ) {
   const id = useInstanceId()
 
@@ -252,14 +218,14 @@ const List: List = React.forwardRef(function List<TDataItem>(
       >
         {renderItem
           ? renderItem({
-              item,
-              searchTerm,
-              index: idx,
-              text: textValue,
-              // TODO: probably remove
-              value: accessors.value(item),
-              disabled: itemIsDisabled,
-            })
+            item,
+            searchTerm,
+            index: idx,
+            text: textValue,
+            // TODO: probably remove
+            value: accessors.value(item),
+            disabled: itemIsDisabled,
+          })
           : textValue}
       </Option>
     )
@@ -267,13 +233,13 @@ const List: List = React.forwardRef(function List<TDataItem>(
 
   const items = groupedData
     ? groupedData.map(([group, items], idx) => (
-        <div role="group" key={`group_${idx}`}>
-          <ListOptionGroup>
-            {renderGroup ? renderGroup({ group }) : (group as string)}
-          </ListOptionGroup>
-          {items.map(renderOption)}
-        </div>
-      ))
+      <div role="group" key={`group_${idx}`}>
+        <ListOptionGroup>
+          {renderGroup ? renderGroup({ group }) : (group as string)}
+        </ListOptionGroup>
+        {items.map(renderOption)}
+      </div>
+    ))
     : data.map(renderOption)
 
   const rootProps = {
@@ -292,9 +258,8 @@ const List: List = React.forwardRef(function List<TDataItem>(
   }
 
   return renderList ? renderList(rootProps) : <div {...rootProps} />
-})
+}
 
 List.displayName = 'List'
-List.propTypes = propTypes
 
 export default List

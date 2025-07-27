@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import TimeInput from '../src/TimeInput'
 import Layout from '@4c/layout'
 

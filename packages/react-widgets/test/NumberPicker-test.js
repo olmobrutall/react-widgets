@@ -1,9 +1,9 @@
 import { mount } from 'enzyme'
-import React from 'react'
+import * as React from 'react'
 import NumberPicker from '../src/NumberPicker'
 
-describe('NumberPicker', function() {
-  it('should set values correctly', function() {
+describe('NumberPicker', function () {
+  it('should set values correctly', function () {
     let expectValueToBe = val => inst =>
       expect(inst.find('.rw-input').getDOMNode().value).to.equal(val)
 
@@ -11,7 +11,7 @@ describe('NumberPicker', function() {
       <NumberPicker
         value={15}
         formats={{ default: 'D' }}
-        onChange={() => {}}
+        onChange={() => { }}
       />,
     )
       .tap(expectValueToBe('15'))
@@ -25,9 +25,9 @@ describe('NumberPicker', function() {
       .tap(expectValueToBe('$10.00'))
   })
 
-  it('should be able to accept a placeholder', function() {
+  it('should be able to accept a placeholder', function () {
     let input = mount(
-      <NumberPicker placeholder="enter number here" onChange={() => {}} />,
+      <NumberPicker placeholder="enter number here" onChange={() => { }} />,
     )
       .find('.rw-input')
       .getDOMNode()
@@ -35,9 +35,9 @@ describe('NumberPicker', function() {
     expect(input.placeholder).to.equal('enter number here')
   })
 
-  it('should pass NAME down', function() {
+  it('should pass NAME down', function () {
     let input = mount(
-      <NumberPicker value={15} onChange={() => {}} name="hello" />,
+      <NumberPicker value={15} onChange={() => { }} name="hello" />,
     )
       .find('.rw-input')
       .getDOMNode()
@@ -45,7 +45,7 @@ describe('NumberPicker', function() {
     expect(input.hasAttribute('name')).to.equal(true)
   })
 
-  it('should not fire change until there is a valid value', function() {
+  it('should not fire change until there is a valid value', function () {
     let change = sinon.spy()
     let input = mount(
       <NumberPicker value={150} min={100} onChange={change} />,
@@ -72,7 +72,7 @@ describe('NumberPicker', function() {
     expect(change.calledOnce).to.equal(true)
   })
 
-  it('should change value when spinner is clicked', function() {
+  it('should change value when spinner is clicked', function () {
     let changeSpy = sinon.spy()
 
     let inst = mount(<NumberPicker value={1} onChange={changeSpy} />)
@@ -122,7 +122,7 @@ describe('NumberPicker', function() {
     expect(blur.called).to.equal(false)
   })
 
-  it('should simulate key events', function() {
+  it('should simulate key events', function () {
     let kp = sinon.spy(),
       kd = sinon.spy(),
       ku = sinon.spy()
@@ -154,7 +154,7 @@ describe('NumberPicker', function() {
     expect(input.getAttribute('aria-disabled')).to.equal('true')
   })
 
-  it('should allow null values with min', function() {
+  it('should allow null values with min', function () {
     let changeSpy = sinon.spy()
 
     mount(<NumberPicker value={15} min={12} onChange={changeSpy} />)
@@ -165,7 +165,7 @@ describe('NumberPicker', function() {
     expect(changeSpy.getCall(0).args[0]).to.equal(null)
   })
 
-  it('should not simulate change at delimiter', function() {
+  it('should not simulate change at delimiter', function () {
     let changeSpy = sinon.spy()
 
     mount(<NumberPicker value={1.5} onChange={changeSpy} />)
@@ -186,7 +186,7 @@ describe('NumberPicker', function() {
     expect(changeSpy.calledOnce).to.equal(true)
   })
 
-  it('should change values on key down', function() {
+  it('should change values on key down', function () {
     let change = sinon.spy()
 
     let instance = mount(<NumberPicker value={10} onChange={change} />)

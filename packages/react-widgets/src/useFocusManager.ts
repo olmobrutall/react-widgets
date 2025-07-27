@@ -17,7 +17,7 @@ const isInDisabledFieldset = (node: Element) => {
 }
 
 export default function useFocusManager(
-  ref: React.RefObject<Element>,
+  ref: React.RefObject<Element | null>,
   props: Props = {},
   opts: Omit<FocusManagerOptions, 'onChange' | 'isDisabled'> = {},
 ) {

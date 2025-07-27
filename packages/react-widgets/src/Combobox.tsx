@@ -1,5 +1,4 @@
 import cn from 'classnames'
-import * as PropTypes from 'prop-types'
 import * as React from 'react'
 import { useImperativeHandle, useMemo, useRef, useState } from 'react'
 import { useUncontrolledProp } from 'uncontrollable'
@@ -23,7 +22,6 @@ import {
 } from './shared'
 import { DataItem, WidgetHandle } from './types'
 import { useActiveDescendant } from './A11y'
-import * as CustomPropTypes from './PropTypes'
 import { TextAccessorFn, useAccessors } from './Accessors'
 import { useFilteredData } from './Filter'
 import useDropdownToggle from './useDropdownToggle'
@@ -42,75 +40,14 @@ function indexOf<TDataItem>(
   return -1
 }
 
-let propTypes = {
-  value: PropTypes.any,
-  onChange: PropTypes.func,
-  open: PropTypes.bool,
-  onToggle: PropTypes.func,
-
-  renderListItem: PropTypes.func,
-  listComponent: PropTypes.elementType,
-
-  renderListGroup: PropTypes.func,
-  groupBy: CustomPropTypes.accessor,
-
-  data: PropTypes.array,
-  dataKey: CustomPropTypes.accessor,
-  textField: CustomPropTypes.accessor,
-  name: PropTypes.string,
-
-  /** Do not show the auto complete list when it returns no results. */
-  hideEmptyPopup: PropTypes.bool,
-
-  /** Hide the combobox dropdown indicator. */
-  hideCaret: PropTypes.bool,
-
-  /**
-   *
-   * @type {(dataItem: ?any, metadata: { originalEvent: SyntheticEvent }) => void}
-   */
-  onSelect: PropTypes.func,
-
-  autoFocus: PropTypes.bool,
-
-  disabled: CustomPropTypes.disabled.acceptsArray,
-
-  readOnly: CustomPropTypes.disabled,
-
-  busy: PropTypes.bool,
-
-  /** Specify the element used to render the select (down arrow) icon. */
-  selectIcon: PropTypes.node,
-
-  /** Specify the element used to render the busy indicator */
-  busySpinner: PropTypes.node,
-
-  dropUp: PropTypes.bool,
-  popupTransition: PropTypes.elementType,
-
-  placeholder: PropTypes.string,
-
-  /** Adds a css class to the input container element. */
-  containerClassName: PropTypes.string,
-
-  inputProps: PropTypes.object,
-  listProps: PropTypes.object,
-
-  messages: PropTypes.shape({
-    openCombobox: CustomPropTypes.message,
-    emptyList: CustomPropTypes.message,
-    emptyFilter: CustomPropTypes.message,
-  }),
-}
-
 export type ComboboxHandle = WidgetHandle
 
 export interface ComboboxProps<TDataItem = DataItem>
   extends WidgetHTMLProps,
-    WidgetProps,
-    PopupWidgetProps,
-    Filterable<TDataItem>,
-    BaseListboxInputProps<TDataItem, string | TDataItem> {
+  WidgetProps,
+  PopupWidgetProps,
+  Filterable<TDataItem>,
+  BaseListboxInputProps<TDataItem, string | TDataItem> {
   name?: string
 
   /**
@@ -122,16 +59,10 @@ export interface ComboboxProps<TDataItem = DataItem>
 
   hideCaret?: boolean
   hideEmptyPopup?: boolean
+
+  ref?: React.RefObject<ComboboxHandle>,
 }
 
-declare interface Combobox {
-  <TDataItem = DataItem>(
-    props: ComboboxProps<TDataItem> & React.RefAttributes<ComboboxHandle>,
-  ): React.ReactElement | null
-
-  displayName?: string
-  propTypes?: any
-}
 
 /**
  * ---
@@ -150,7 +81,7 @@ declare interface Combobox {
 
  * @public
  */
-const ComboboxImpl: Combobox = React.forwardRef(function Combobox<TDataItem>(
+function ComboboxImpl<TDataItem>(
   {
     id,
     className,
@@ -199,9 +130,9 @@ const ComboboxImpl: Combobox = React.forwardRef(function Combobox<TDataItem>(
     popupComponent: Popup = BasePopup,
     data: rawData = [],
     messages: userMessages,
+    ref: outerRef,
     ...elementProps
   }: ComboboxProps<TDataItem>,
-  outerRef: React.RefObject<ComboboxHandle>,
 ) {
   let [currentValue, handleChange] = useUncontrolledProp(
     value,
@@ -520,9 +451,8 @@ const ComboboxImpl: Combobox = React.forwardRef(function Combobox<TDataItem>(
       </FocusListContext.Provider>
     </Widget>
   )
-})
+}
 
 ComboboxImpl.displayName = 'Combobox'
-ComboboxImpl.propTypes = propTypes
 
 export default ComboboxImpl

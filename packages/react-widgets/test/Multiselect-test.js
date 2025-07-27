@@ -1,5 +1,5 @@
 import { mount } from 'enzyme'
-import React from 'react'
+import * as React from 'react'
 import Multiselect from '../src/Multiselect'
 import MultiselectTag from '../src/MultiselectTag'
 import MultiselectTagList from '../src/MultiselectTagList'
@@ -12,7 +12,7 @@ describe('Multiselect', function () {
   ]
 
   it('should set initial values', function () {
-    mount(<Multiselect value={['hello']} onChange={() => {}} />)
+    mount(<Multiselect value={['hello']} onChange={() => { }} />)
       .find(MultiselectTag)
       .contains('hello')
   })
@@ -281,7 +281,7 @@ describe('Multiselect', function () {
         value={value}
         data={dataList}
         onChange={change}
-        onToggle={() => {}}
+        onToggle={() => { }}
       />,
     )
       .find('List')
@@ -308,7 +308,7 @@ describe('Multiselect', function () {
         value={value}
         data={dataList}
         onSearch={search}
-        onToggle={() => {}}
+        onToggle={() => { }}
       />,
     )
       .assertSingle('MultiselectInput')
@@ -371,7 +371,7 @@ describe('Multiselect', function () {
         <Multiselect
           searchTerm="jim"
           data={dataList}
-          onSearch={() => {}}
+          onSearch={() => { }}
           onKeyDown={spy}
         />
       </form>,
@@ -389,7 +389,7 @@ describe('Multiselect', function () {
         allowCreate="onFilter"
         searchTerm="custom tag"
         data={dataList}
-        onSearch={() => {}}
+        onSearch={() => { }}
         textField="label"
         dataKey="id"
       />,
@@ -419,8 +419,8 @@ describe('Multiselect', function () {
         searchTerm="custom tag"
         data={dataList}
         onCreate={create}
-        onSearch={() => {}}
-        onToggle={() => {}}
+        onSearch={() => { }}
+        onToggle={() => { }}
       />,
     )
 

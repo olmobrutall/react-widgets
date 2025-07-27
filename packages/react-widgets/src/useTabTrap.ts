@@ -12,7 +12,7 @@ const defaultSelector = [
 const getDocument = () => document
 
 export default function useTabTrap(
-  ref: React.RefObject<Element>,
+  ref: React.RefObject<Element | null>,
   selector: string = defaultSelector,
 ) {
   const startedRef = useRef(false)

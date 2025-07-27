@@ -1,5 +1,5 @@
 import { mount } from 'enzyme'
-import React from 'react'
+import * as React from 'react'
 import DatePicker from '../src/DatePicker'
 import { DateLocalizer } from '../src/IntlLocalizer'
 
@@ -63,7 +63,7 @@ describe('DatePicker', () => {
   it('should change when selecting a date', () => {
     let change = sinon.spy()
 
-    mount(<DatePicker open onChange={change} onToggle={() => {}} />)
+    mount(<DatePicker open onChange={change} onToggle={() => { }} />)
       .find('.rw-cell')
       .first()
       .simulate('click')
@@ -80,7 +80,7 @@ describe('DatePicker', () => {
         open
         onChange={change}
         onSelect={select}
-        onToggle={() => {}}
+        onToggle={() => { }}
       />,
     )
       .find('li.rw-list-option')

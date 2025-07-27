@@ -1,10 +1,5 @@
-import PropTypes from 'prop-types'
-import React from 'react'
+import * as React from 'react'
 
-const propTypes = {
-  text: PropTypes.string,
-  searchTerm: PropTypes.string,
-}
 
 function AutocompleteListItem({
   text,
@@ -26,7 +21,5 @@ function AutocompleteListItem({
     </>
   )
 }
-
-AutocompleteListItem.propTypes = propTypes
 
 export default AutocompleteListItem

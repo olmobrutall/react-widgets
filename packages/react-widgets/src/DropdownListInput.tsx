@@ -1,5 +1,6 @@
 import cn from 'classnames'
-import React, { useImperativeHandle, useRef, useState } from 'react'
+import * as React from 'react'
+import { useImperativeHandle, useRef, useState } from 'react'
 import { RenderProp, Value, WidgetHandle } from './types'
 import { TextAccessorFn, DataKeyAccessorFn } from './Accessors'
 

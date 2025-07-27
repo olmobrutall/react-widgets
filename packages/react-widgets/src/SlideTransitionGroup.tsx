@@ -1,16 +1,14 @@
 import cn from 'classnames'
 import transitionEnd from 'dom-helpers/transitionEnd'
-import PropTypes from 'prop-types'
-import React from 'react'
+import * as React from 'react'
 
-const DirectionPropType = PropTypes.oneOf(['left', 'right', 'top', 'bottom'])
 
 const prefix = 'rw-calendar-transition'
 const active = 'rw-calendar-transition-active'
 const next = 'rw-calendar-transition-next'
 const prev = 'rw-calendar-transition-prev'
 
-const clone = (el: React.ReactElement | null | undefined, cls: string) =>
+const clone = (el: React.ReactElement<{ className?: string }> | null | undefined, cls: string) =>
   el &&
   React.cloneElement(el, {
     className: cn(el.props.className, prefix, cls),
@@ -18,7 +16,8 @@ const clone = (el: React.ReactElement | null | undefined, cls: string) =>
 
 interface SlideTransitionGroupProps {
   onTransitionEnd: (node: ChildNode, hadFocus: boolean | null) => void
-  direction: 'left' | 'right' | 'top' | 'bottom'
+  direction: 'left' | 'right' | 'top' | 'bottom';
+  children: React.ReactElement<{ className?: string }>;
 }
 
 interface SlideTransitionGroupState {
@@ -34,22 +33,17 @@ class SlideTransitionGroup extends React.Component<
     direction: 'left',
   }
 
-  static propTypes = {
-    direction: DirectionPropType,
-    onTransitionEnd: PropTypes.func,
-  }
-
   isTransitioning?: boolean
-  container: React.RefObject<HTMLDivElement>
-  current: React.ReactElement
+  container: React.RefObject<HTMLDivElement | null>
+  current: React.ReactElement<{ className?: string }> | null;
   flush?: boolean
-  prev?: React.ReactElement | null
+  prev?: React.ReactElement<{ className?: string }> | null
 
   constructor(args: SlideTransitionGroupProps) {
     super(args)
 
-    this.current = this.props.children as React.ReactElement
-    this.container = React.createRef()
+    this.current = this.props.children;
+    this.container = React.createRef<HTMLDivElement>();
 
     this.state = {
       prevClasses: '',
@@ -84,7 +78,7 @@ class SlideTransitionGroup extends React.Component<
             if (
               (this.current as any).key !== (this.props.children as any).key
             ) {
-              this.current = this.props.children as React.ReactElement
+              this.current = this.props.children;
             }
 
             this.setState({ prevClasses: '', currentClasses: '' }, () =>
@@ -112,7 +106,7 @@ class SlideTransitionGroup extends React.Component<
         this.flush = true
       }
 
-      this.current = children as React.ReactElement
+      this.current = children;
     }
 
     let { prevClasses, currentClasses } = this.state

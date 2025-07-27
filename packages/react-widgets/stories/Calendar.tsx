@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import * as React from 'react'
+import { useState } from 'react'
 import Calendar from '../src/Calendar'
 
 export const BASIC = () => <Calendar />

@@ -1,7 +1,7 @@
 import cn from 'classnames'
 import closest from 'dom-helpers/closest'
-import PropTypes from 'prop-types'
-import React, {
+import * as React from 'react'
+import {
   useImperativeHandle,
   useMemo,
   useRef,
@@ -34,7 +34,6 @@ import {
 import { DataItem, Value, WidgetHandle } from './types'
 import { setActiveDescendant } from './A11y'
 import { useFilteredData, Filter } from './Filter'
-import * as CustomPropTypes from './PropTypes'
 import canShowCreate from './canShowCreate'
 import { Accessors, useAccessors } from './Accessors'
 import useDropdownToggle from './useDropdownToggle'
@@ -46,109 +45,6 @@ const ENTER = 13
 
 const INSERT = 'insert'
 const REMOVE = 'remove'
-
-let propTypes = {
-  data: PropTypes.array,
-  //-- controlled props --
-  value: PropTypes.array,
-
-  /**
-   * @type {function (
-   *  dataItems: ?any[],
-   *  metadata: {
-   *    dataItem: any,
-   *    action: 'insert' | 'remove',
-   *    originalEvent: SyntheticEvent,
-   *    lastValue: ?any[],
-   *    searchTerm: ?string
-   *  }
-   * ): void}
-   */
-  onChange: PropTypes.func,
-
-  searchTerm: PropTypes.string,
-  /**
-   * @type {function (
-   *  searchTerm: ?string,
-   *  metadata: {
-   *    action: 'clear' | 'input',
-   *    lastSearchTerm: ?string,
-   *    originalEvent: SyntheticEvent,
-   *  }
-   * ): void}
-   */
-  onSearch: PropTypes.func,
-
-  open: PropTypes.bool,
-  handleOpen: PropTypes.func,
-  //-------------------------------------------
-
-  dataKey: CustomPropTypes.accessor,
-  textField: CustomPropTypes.accessor,
-
-  renderTagValue: PropTypes.func,
-
-  renderListItem: PropTypes.func,
-
-  renderListGroup: PropTypes.func,
-  groupBy: CustomPropTypes.accessor,
-
-  allowCreate: PropTypes.oneOf([true, false, 'onFilter']),
-
-  /**
-   *
-   * @type { (dataItem: ?any, metadata: { originalEvent: SyntheticEvent }) => void }
-   */
-  onSelect: PropTypes.func,
-
-  /**
-   * @type { (searchTerm: string) => void }
-   */
-  onCreate: PropTypes.func,
-
-  busy: PropTypes.bool,
-
-  /** Specify the element used to render the select (down arrow) icon. */
-  selectIcon: PropTypes.node,
-
-  /** Specify the element used to render tag clear icons. */
-  clearTagIcon: PropTypes.node,
-
-  /** Specify the element used to render the busy indicator */
-  busySpinner: PropTypes.node,
-
-  dropUp: PropTypes.bool,
-  popupTransition: PropTypes.elementType,
-
-  /** Adds a css class to the input container element. */
-  containerClassName: PropTypes.string,
-  inputProps: PropTypes.object,
-  listProps: PropTypes.object,
-
-  autoFocus: PropTypes.bool,
-  placeholder: PropTypes.string,
-
-  /** Continue to show the input placeholder even if tags are selected */
-  showPlaceholderWithValues: PropTypes.bool,
-
-  /** Continue to show the selected items in the dropdown list */
-  showSelectedItemsInList: PropTypes.bool,
-
-  disabled: CustomPropTypes.disabled.acceptsArray,
-  readOnly: CustomPropTypes.disabled,
-
-  messages: PropTypes.shape({
-    open: CustomPropTypes.message,
-    emptyList: CustomPropTypes.message,
-    emptyFilter: CustomPropTypes.message,
-    createOption: CustomPropTypes.message,
-
-    tagsLabel: CustomPropTypes.message,
-    selectedItems: CustomPropTypes.message,
-    noneSelected: CustomPropTypes.message,
-    removeLabel: CustomPropTypes.message,
-  }),
-}
 
 const EMPTY_ARRAY = [] as unknown[]
 
@@ -189,11 +85,11 @@ export type ChangeHandler<TDataItem> = (
 
 export interface MultiselectProps<TDataItem = DataItem>
   extends WidgetHTMLProps,
-    WidgetProps,
-    PopupWidgetProps,
-    Filterable<TDataItem>,
-    Searchable,
-    Omit<BaseListboxInputProps<TDataItem, unknown[]>, 'onChange'> {
+  WidgetProps,
+  PopupWidgetProps,
+  Filterable<TDataItem>,
+  Searchable,
+  Omit<BaseListboxInputProps<TDataItem, unknown[]>, 'onChange'> {
   onChange?: ChangeHandler<TDataItem>
   onCreate?: (searchTerm: string) => void
   showPlaceholderWithValues?: boolean
@@ -732,6 +628,5 @@ const Multiselect: Multiselect = React.forwardRef(function Multiselect<
 })
 
 Multiselect.displayName = 'Multiselect'
-Multiselect.propTypes = propTypes
 
 export default Multiselect

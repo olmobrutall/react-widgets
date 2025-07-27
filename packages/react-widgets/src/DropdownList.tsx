@@ -1,6 +1,6 @@
 import cn from 'classnames'
-import PropTypes from 'prop-types'
-import React, { useImperativeHandle, useMemo, useRef, useState } from 'react'
+import { useImperativeHandle, useMemo, useRef, useState } from 'react'
+import * as React from 'react'
 import { useUncontrolledProp } from 'uncontrollable'
 import useTimeout from '@restart/hooks/useTimeout'
 import AddToListOption, { CREATE_OPTION } from './AddToListOption'
@@ -25,7 +25,6 @@ import {
 import { DataItem, WidgetHandle } from './types'
 import { useActiveDescendant } from './A11y'
 import { useFilteredData, presets } from './Filter'
-import * as CustomPropTypes from './PropTypes'
 import canShowCreate from './canShowCreate'
 import { useAccessors } from './Accessors'
 import useAutoFocus from './useAutoFocus'
@@ -34,85 +33,6 @@ import useFocusManager from './useFocusManager'
 import { useLocalizer } from './Localization'
 import { notify, useFirstFocusedRender, useInstanceId } from './WidgetHelpers'
 import PickerCaret from './PickerCaret'
-
-const propTypes = {
-  value: PropTypes.any,
-
-  /**
-   * @type {function (
-   *  dataItems: ?any,
-   *  metadata: {
-   *    lastValue: ?any,
-   *    searchTerm: ?string
-   *    originalEvent: SyntheticEvent,
-   *  }
-   * ): void}
-   */
-  onChange: PropTypes.func,
-  open: PropTypes.bool,
-  onToggle: PropTypes.func,
-
-  data: PropTypes.array,
-  dataKey: CustomPropTypes.accessor,
-  textField: CustomPropTypes.accessor,
-  allowCreate: PropTypes.oneOf([true, false, 'onFilter']),
-
-  /**
-   * A React render prop for customizing the rendering of the DropdownList
-   * value
-   */
-  renderValue: PropTypes.func,
-  renderListItem: PropTypes.func,
-  listComponent: CustomPropTypes.elementType,
-  optionComponent: CustomPropTypes.elementType,
-  renderPopup: PropTypes.func,
-
-  renderListGroup: PropTypes.func,
-  groupBy: CustomPropTypes.accessor,
-
-  /**
-   *
-   * @type {(dataItem: ?any, metadata: { originalEvent: SyntheticEvent }) => void}
-   */
-  onSelect: PropTypes.func,
-
-  onCreate: PropTypes.func,
-
-  /**
-   * @type function(searchTerm: string, metadata: { action, lastSearchTerm, originalEvent? })
-   */
-  onSearch: PropTypes.func,
-
-  searchTerm: PropTypes.string,
-  busy: PropTypes.bool,
-
-  /** Specify the element used to render the select (down arrow) icon. */
-  selectIcon: PropTypes.node,
-
-  /** Specify the element used to render the busy indicator */
-  busySpinner: PropTypes.node,
-
-  placeholder: PropTypes.string,
-
-  dropUp: PropTypes.bool,
-  popupTransition: CustomPropTypes.elementType,
-
-  disabled: CustomPropTypes.disabled.acceptsArray,
-  readOnly: CustomPropTypes.disabled,
-
-  /** Adds a css class to the input container element. */
-  containerClassName: PropTypes.string,
-
-  inputProps: PropTypes.object,
-  listProps: PropTypes.object,
-
-  messages: PropTypes.shape({
-    open: PropTypes.string,
-    emptyList: CustomPropTypes.message,
-    emptyFilter: CustomPropTypes.message,
-    createOption: CustomPropTypes.message,
-  }),
-}
 
 function useSearchWordBuilder(delay: number) {
   const timeout = useTimeout()
@@ -137,35 +57,26 @@ export type DropdownHandle = WidgetHandle
 
 export interface DropdownProps<TDataItem>
   extends WidgetProps,
-    WidgetHTMLProps,
-    PopupWidgetProps,
-    Searchable,
-    Filterable<TDataItem>,
-    BaseListboxInputProps<TDataItem> {
+  WidgetHTMLProps,
+  PopupWidgetProps,
+  Searchable,
+  Filterable<TDataItem>,
+  BaseListboxInputProps<TDataItem> {
   name?: string
   autoFocus?: boolean
   autoComplete?: 'on' | 'off'
 
   onCreate?: (searchTerm: string) => void
   renderValue?: RenderValueProp<TDataItem>
+  ref?: React.RefObject<DropdownHandle>,
 }
 
-declare interface DropdownList {
-  <TDataItem = DataItem>(
-    props: DropdownProps<TDataItem> & React.RefAttributes<DropdownHandle>,
-  ): React.ReactElement | null
-
-  displayName?: string
-  propTypes?: any
-}
 
 /**
  * A `<select>` replacement for single value lists.
  * @public
  */
-const DropdownListImpl: DropdownList = React.forwardRef(function DropdownList<
-  TDataItem
->(
+function DropdownListImpl<TDataItem>(
   {
     id,
     autoFocus,
@@ -222,9 +133,9 @@ const DropdownListImpl: DropdownList = React.forwardRef(function DropdownList<
     popupComponent: Popup = BasePopup,
     data: rawData = [],
     messages: userMessages,
+    ref: outerRef,
     ...elementProps
   }: DropdownProps<TDataItem>,
-  outerRef: React.RefObject<DropdownHandle>,
 ) {
   const [currentValue, handleChange] = useUncontrolledProp(
     value,
@@ -628,10 +539,8 @@ const DropdownListImpl: DropdownList = React.forwardRef(function DropdownList<
       </Widget>
     </FocusListContext.Provider>
   )
-})
+}
 
 DropdownListImpl.displayName = 'DropdownList'
-
-DropdownListImpl.propTypes = propTypes
 
 export default DropdownListImpl

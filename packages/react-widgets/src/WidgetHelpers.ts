@@ -14,7 +14,7 @@ export function notify<T extends (...args: any) => any>(
 }
 
 export const useInstanceId = (otherId?: string, suffix = '') => {
-  const id = useRef<string>()
+  const id = useRef<string>(undefined);
   if (!id.current) id.current = uniqueId('rw_')
   return (otherId || id.current) + suffix
 }

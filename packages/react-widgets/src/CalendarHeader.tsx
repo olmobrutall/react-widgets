@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import CalendarButton from './CalendarButton'
 import { caretDown, chevronLeft, chevronRight } from './Icon'
 import { Localizer } from './Localization'

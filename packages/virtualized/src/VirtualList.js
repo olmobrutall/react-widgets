@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import cn from 'classnames'
-import PropTypes from 'prop-types'
-import React, {
+import * as React from 'react'
+import {
   useContext,
   useEffect,
   useMemo,
@@ -16,19 +16,6 @@ import ListOption from 'react-widgets/ListOption'
 import { FocusListContext } from 'react-widgets/FocusListContext'
 import ListOptionGroup from 'react-widgets/ListOptionGroup'
 import { groupBySortedKeys, toItemArray } from 'react-widgets/_'
-
-export const virtualListPropTypes = {
-  itemSizeEstimator: PropTypes.func,
-  itemSizeGetter: PropTypes.func,
-  pageSize: PropTypes.number,
-  threshold: PropTypes.number,
-  type: PropTypes.oneOf(['simple', 'variable', 'uniform']),
-  useStaticSize: PropTypes.bool,
-  useTranslate3d: PropTypes.bool,
-  hasNextPage: PropTypes.bool,
-  onRequestItems: PropTypes.func,
-  loadingComponent: PropTypes.elementType,
-}
 
 function useFlattenedData(data, groupBy) {
   return useMemo(() => {

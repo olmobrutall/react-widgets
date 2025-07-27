@@ -1,5 +1,6 @@
 import cn from 'classnames'
-import React, { ReactNode, useEffect, useRef } from 'react'
+import * as React from 'react'
+import { ReactNode, useEffect, useRef } from 'react'
 import dates from './dates'
 import useFocusManager from './useFocusManager'
 

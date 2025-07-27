@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useMemo, createContext } from 'react'
+import * as React from 'react'
+import { useState, useEffect, useMemo, createContext } from 'react'
 import { render } from 'react-dom'
 
 export const RouterContext = createContext(null)

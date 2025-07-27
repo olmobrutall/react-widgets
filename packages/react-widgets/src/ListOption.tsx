@@ -1,15 +1,6 @@
 import cn from 'classnames'
-import PropTypes from 'prop-types'
-import React from 'react'
+import * as React from 'react'
 import { useListOption } from './FocusListContext'
-
-const propTypes = {
-  activeId: PropTypes.string,
-  dataItem: PropTypes.any,
-  selected: PropTypes.bool.isRequired,
-  onSelect: PropTypes.func.isRequired,
-  component: PropTypes.any,
-}
 
 export interface ListOptionProps<TDataItem>
   extends Omit<React.HTMLProps<HTMLDivElement>, 'onSelect'> {
@@ -64,7 +55,5 @@ function ListOption<TDataItem>({
   )
 }
 
-// @ts-ignore
-ListOption.propTypes = propTypes
 
 export default ListOption

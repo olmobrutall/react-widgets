@@ -2,20 +2,14 @@ import cn from 'classnames'
 import css from 'dom-helpers/css'
 import getHeight from 'dom-helpers/height'
 import transitionEnd from 'dom-helpers/transitionEnd'
-import PropTypes from 'prop-types'
-import React from 'react'
-import Transition, {
-  ENTERING,
-  EXITED,
-  EXITING,
-  TransitionStatus,
-} from 'react-transition-group/Transition'
+import * as React from 'react'
+import { Transition, TransitionStatus } from './Transition'
 
-const transitionClasses = {
-  [ENTERING]: 'rw-slide-transition-entering',
-  [EXITING]: 'rw-slide-transition-exiting',
-  [EXITED]: 'rw-slide-transition-exited',
-}
+const transitionClasses: Partial<Record<TransitionStatus, string | undefined>> = {
+  "entering": 'rw-slide-transition-entering',
+  "exiting": 'rw-slide-transition-exiting',
+  "exited": 'rw-slide-transition-exited',
+};
 
 export interface SlideDownTransitionProps {
   in: boolean
@@ -26,18 +20,10 @@ export interface SlideDownTransitionProps {
   onEntering?: () => void
   onEntered?: () => void
   className?: string
+  children: React.ReactElement<{ className?: string }>
 }
 
 class SlideDownTransition extends React.Component<SlideDownTransitionProps> {
-  static propTypes = {
-    in: PropTypes.bool.isRequired,
-    innerClassName: PropTypes.string,
-    dropUp: PropTypes.bool,
-    onExit: PropTypes.func,
-    onExited: PropTypes.func,
-    onEntering: PropTypes.func,
-    onEntered: PropTypes.func,
-  }
 
   nodeRef = React.createRef<HTMLElement>()
 
@@ -117,10 +103,10 @@ class SlideDownTransition extends React.Component<SlideDownTransitionProps> {
               (transitionClasses as any)[status],
             )}
           >
-            {React.cloneElement(children as React.ReactElement, {
+            {React.cloneElement(children, {
               className: cn(
                 'rw-slide-transition',
-                (children as React.ReactElement).props.className,
+                children.props.className,
               ),
             })}
           </div>

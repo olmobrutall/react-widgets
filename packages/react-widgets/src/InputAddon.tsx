@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import React from 'react'
+import * as React from 'react'
 import Button, { Props as ButtonProps } from './Button'
 
 interface Props extends ButtonProps {

@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { addons, types } from '@storybook/addons'
 import { AddonPanel } from '@storybook/components'
 import Form from 'react-formal'
@@ -57,7 +57,7 @@ const MyPanel = ({ channel }) => {
                 <Form.Field
                   name={key}
                   as={isColor(key, value) ? ColorPicker : 'input'}
-                  // style={{ width: '100%', height: '1.6rem' }}
+                // style={{ width: '100%', height: '1.6rem' }}
                 />
               </label>
             </div>

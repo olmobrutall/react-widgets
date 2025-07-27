@@ -1,5 +1,6 @@
 import cn from 'classnames'
-import React, { useState } from 'react'
+import * as React from 'react'
+import { useState } from 'react'
 import useGlobalListener from '@restart/hooks/useGlobalListener'
 
 export interface WidgetProps extends React.HTMLAttributes<HTMLDivElement> {

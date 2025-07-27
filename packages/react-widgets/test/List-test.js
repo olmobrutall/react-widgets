@@ -1,5 +1,5 @@
 import { mount } from 'enzyme'
-import React from 'react'
+import * as React from 'react'
 import List from '../src/List'
 
 xdescribe('List', () => {
@@ -23,7 +23,7 @@ xdescribe('List', () => {
     let numItems = 5
 
     expect(
-      mount(<List data={data} onChange={() => {}} {...props} />).find(
+      mount(<List data={data} onChange={() => { }} {...props} />).find(
         '[role="option"]',
       ).length,
     ).to.equal(numItems)
@@ -33,7 +33,7 @@ xdescribe('List', () => {
     let selectSpy = sinon.spy()
 
     mount(
-      <List data={data} onSelect={selectSpy} onChange={() => {}} {...props} />,
+      <List data={data} onSelect={selectSpy} onChange={() => { }} {...props} />,
     )
       .find('[role="option"]')
       .first()

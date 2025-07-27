@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import qsa from 'dom-helpers/querySelectorAll'
-import PropTypes from 'prop-types'
-import React, { useCallback, useRef, useState } from 'react'
+import * as React from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { useUncontrolled } from 'uncontrollable'
 import Button from './Button'
 import DateTimePartInput from './DateTimePartInput'
@@ -130,76 +130,6 @@ export interface TimeInputProps
   millisecondsAddon?: React.ReactNode
 }
 
-const propTypes = {
-  /**
-   * @example ['valuePicker', [ ['new Date()'] ]]
-   */
-  value: PropTypes.instanceOf(Date),
-
-  /**
-   * @example ['onChangePicker', [ ['new Date()'] ]]
-   */
-  onChange: PropTypes.func,
-
-  /**
-   * The default date used to construct a new time when the `value` is empty
-   *
-   * @default new Date()
-   **/
-  datePart: PropTypes.instanceOf(Date),
-
-  /**
-   * Use a 12 hour clock (with AM/PM) instead of 24 hour one.
-   * The configured localizer may provide a default value .
-   **/
-  use12HourClock: PropTypes.bool,
-
-  /** Time part values will be padded by `0` */
-  padValues: PropTypes.bool,
-
-  /** The string character used to pad empty, or cleared values */
-  emptyCharacter: PropTypes.string,
-
-  /** Hide the input clear button */
-  noClearButton: PropTypes.bool,
-
-  /**
-   * @example ['disabled', ['new Date()']]
-   */
-  disabled: PropTypes.bool,
-
-  /**
-   * @example ['readOnly', ['new Date()']]
-   */
-  readOnly: PropTypes.bool,
-
-  /** Controls how precise of a time can be input **/
-  precision: PropTypes.oneOf(['minutes', 'seconds', 'milliseconds']).isRequired,
-
-  /**
-   * The seperator between hours and minutes
-   * @default ':'
-   */
-  hoursAddon: PropTypes.node,
-
-  /**
-   * The seperator between hours and minutes
-   * @default ':'
-   */
-  minutesAddon: PropTypes.node,
-
-  /**
-   * The seperator between hours and minutes
-   * @default ':'
-   */
-  secondsAddon: PropTypes.node,
-
-  /**
-   * The seperator between hours and minutes
-   * @default '.'
-   */
-  millisecondsAddon: PropTypes.node,
-}
 
 const defaultProps = {
   hoursAddon: ':',
@@ -266,14 +196,14 @@ function TimeInput(uncontrolledProps: TimeInputProps) {
     minutesAddon !== undefined
       ? minutesAddon
       : precision === 'seconds' || precision === 'milliseconds'
-      ? ':'
-      : ''
+        ? ':'
+        : ''
   let secsAddon =
     secondsAddon !== undefined
       ? secondsAddon
       : precision === 'milliseconds'
-      ? ':'
-      : ''
+        ? ':'
+        : ''
 
   const ref = useRef<HTMLDivElement>(null)
   const hourRef = useRef<HTMLInputElement>(null)
@@ -594,7 +524,6 @@ function TimeInput(uncontrolledProps: TimeInputProps) {
   )
 }
 
-TimeInput.propTypes = propTypes
 TimeInput.defaultProps = defaultProps
 
 export default TimeInput

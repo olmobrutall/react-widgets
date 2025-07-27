@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import DropdownList from '../src/DropdownList'
 import Localization from '../src/Localization'
 
@@ -137,13 +137,13 @@ export const autofill = () => (
 )
 
 export const localized_messages = () => (
-  <Localization messages={{emptyFilter: 'Geen resultaten na filter', emptyList: 'Geen items in de lijst', createOption: (v,s) => `Maak optie '${s}'`}}>
-    <DropdownList {...props} filter="contains" allowCreate/>
+  <Localization messages={{ emptyFilter: 'Geen resultaten na filter', emptyList: 'Geen items in de lijst', createOption: (v, s) => `Maak optie '${s}'` }}>
+    <DropdownList {...props} filter="contains" allowCreate />
 
     <DropdownList {...props} data={[]} />
 
-    <DropdownList {...props} messages={{emptyFilter: 'Nada'}}/>
-    
+    <DropdownList {...props} messages={{ emptyFilter: 'Nada' }} />
+
   </Localization>
- 
+
 )

@@ -1,6 +1,5 @@
 import cn from 'classnames'
-import PropTypes from 'prop-types'
-import React from 'react'
+import * as React from 'react'
 
 export interface InputProps extends React.AllHTMLAttributes<HTMLInputElement> {
   component?: React.ElementType
@@ -37,13 +36,5 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 )
 
 Input.displayName = 'Input'
-Input.propTypes = {
-  disabled: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  value: PropTypes.string,
-  type: PropTypes.string,
-  tabIndex: PropTypes.number,
-  component: PropTypes.any,
-}
 
 export default Input

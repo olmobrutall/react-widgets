@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import querySelectorAll from 'dom-helpers/querySelectorAll'
-import React, {
+import * as React from 'react'
+import {
   useCallback,
   useContext,
   useLayoutEffect,

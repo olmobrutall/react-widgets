@@ -1,6 +1,6 @@
 import cn from 'classnames'
-import PropTypes from 'prop-types'
-import React, { useRef } from 'react'
+import * as React from 'react'
+import { useRef } from 'react'
 import { useUncontrolled } from 'uncontrollable'
 import Button from './Button'
 import { caretDown, caretUp } from './Icon'
@@ -8,7 +8,6 @@ import { useLocalizer, Localizer } from './Localization'
 import NumberInput from './NumberInput'
 import Widget, { WidgetProps } from './Widget'
 import WidgetPicker from './WidgetPicker'
-import * as CustomPropTypes from './PropTypes'
 import useFocusManager from './useFocusManager'
 import { notify } from './WidgetHelpers'
 import { WidgetHTMLProps } from './shared'
@@ -44,86 +43,6 @@ function clamp(value: number | null | undefined, min: number, max: number) {
   )
 }
 
-const propTypes = {
-  /**
-   * @example ['valuePicker', [ [1, null] ]]
-   */
-  value: PropTypes.number,
-
-  /**
-   * @example ['onChangePicker', [ [1, null] ]]
-   */
-  onChange: PropTypes.func,
-
-  /**
-   * The minimum number that the NumberPicker value.
-   * @example ['prop', ['min', 0]]
-   */
-  min: PropTypes.number,
-
-  /**
-   * The maximum number that the NumberPicker value.
-   *
-   * @example ['prop', ['max', 0]]
-   */
-  max: PropTypes.number,
-
-  /**
-   * Amount to increase or decrease value when using the spinner buttons.
-   *
-   * @example ['prop', ['step', 5]]
-   */
-  step: PropTypes.number,
-
-  /**
-   * Specify how precise the `value` should be when typing, incrementing, or decrementing the value.
-   * When empty, precision is parsed from the current `format` and culture.
-   */
-  precision: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf(['auto'])]),
-
-  /**
-   * A format string used to display the number value. Localizer dependent, read about [localization](localization) for more info.
-   *
-   * @example ['prop', { max: 1, min: -1 , defaultValue: 0.2585, format: "{ style: 'percent' }" }]
-   */
-  format: PropTypes.any,
-
-  parse: PropTypes.func,
-
-  incrementIcon: PropTypes.node,
-  decrementIcon: PropTypes.node,
-
-  /** @ignore */
-  tabIndex: PropTypes.any,
-  name: PropTypes.string,
-  placeholder: PropTypes.string,
-  onKeyDown: PropTypes.func,
-  onKeyPress: PropTypes.func,
-  onKeyUp: PropTypes.func,
-  autoFocus: PropTypes.bool,
-
-  /**
-   * @example ['disabled', ['1']]
-   */
-  disabled: CustomPropTypes.disabled,
-  /**
-   * @example ['readOnly', ['1.5']]
-   */
-  readOnly: CustomPropTypes.disabled,
-
-  /** Adds a css class to the input container element. */
-  containerClassName: PropTypes.string,
-
-  inputProps: PropTypes.object,
-  messages: PropTypes.shape({
-    increment: PropTypes.string,
-    decrement: PropTypes.string,
-  }),
-
-  /** @ignore */
-  localizer: PropTypes.object,
-}
-
 const defaultProps = {
   incrementIcon: caretUp,
   decrementIcon: caretDown,
@@ -136,7 +55,7 @@ const defaultProps = {
 
 export interface NumberPickerProps
   extends WidgetHTMLProps,
-    Omit<WidgetProps, 'onChange'> {
+  Omit<WidgetProps, 'onChange'> {
   /**
    * @example ['valuePicker', [ [1, null] ]]
    */
@@ -472,8 +391,7 @@ function NumberPicker(uncontrolledProps: NumberPickerProps) {
   )
 }
 
-;(NumberPicker as any).propTypes = propTypes
-;(NumberPicker as any).defaultProps = defaultProps
+(NumberPicker as any).defaultProps = defaultProps;
 
 export default NumberPicker
 

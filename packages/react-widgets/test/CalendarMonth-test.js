@@ -1,9 +1,9 @@
 import { mount } from 'enzyme'
-import React from 'react'
+import * as React from 'react'
 import { useLocalizer } from '../src/Localization'
 import Month from '../src/Month'
 
-describe('Month Component', function() {
+describe('Month Component', function () {
   it('should use the right format', () => {
     var date = new Date(2015, 1, 16, 0, 0, 0),
       formatter = sinon.spy(() => 'hi')
@@ -16,7 +16,7 @@ describe('Month Component', function() {
       <LocalizedMonth
         value={date}
         focusedItem={date}
-        onChange={() => {}}
+        onChange={() => { }}
         formats={{
           dayOfMonth: { day: '2-digit' },
         }}

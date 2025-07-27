@@ -1,9 +1,8 @@
 import activeElement from 'dom-helpers/activeElement'
 import canUseDOM from 'dom-helpers/canUseDOM'
-import PropTypes from 'prop-types'
-import React, { createRef, FocusEvent, SyntheticEvent } from 'react'
+import * as React from 'react'
+import { createRef, FocusEvent, SyntheticEvent } from 'react'
 import Input from './Input'
-import * as CustomPropTypes from './PropTypes'
 import { Localizer } from './Localization'
 import { mergeRefs } from '@restart/hooks/useMergedRefs'
 
@@ -69,23 +68,6 @@ class NumberPickerInput extends React.Component<
     editing: false,
   }
 
-  static propTypes = {
-    value: PropTypes.number,
-    editing: PropTypes.bool,
-    placeholder: PropTypes.string,
-
-    localizer: PropTypes.object.isRequired,
-    parse: PropTypes.func,
-
-    min: PropTypes.number,
-    max: PropTypes.number,
-
-    disabled: CustomPropTypes.disabled,
-    readOnly: CustomPropTypes.disabled,
-
-    onChange: PropTypes.func.isRequired,
-  }
-
   state: NumberPickerInputState = {}
 
   input = createRef<HTMLInputElement>()
@@ -110,8 +92,8 @@ class NumberPickerInput extends React.Component<
       value == null || isNaN(value)
         ? ''
         : editing
-        ? ('' + value).replace('.', decimal)
-        : localizer.formatNumber(value /*, 'default'*/)
+          ? ('' + value).replace('.', decimal)
+          : localizer.formatNumber(value /*, 'default'*/)
 
     if (prevState.lastValueFromProps !== stringValue)
       return {

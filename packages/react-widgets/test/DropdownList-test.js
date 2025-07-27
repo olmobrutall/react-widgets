@@ -1,5 +1,5 @@
 import { mount } from 'enzyme'
-import React from 'react'
+import * as React from 'react'
 import { act } from 'react-dom/test-utils'
 import DropdownList from '../src/DropdownList'
 import Popup from '../src/Popup'
@@ -176,7 +176,7 @@ describe('DropdownList', function () {
           value={data[0]}
           searchTerm="foooo"
           onChange={change}
-          onToggle={() => {}}
+          onToggle={() => { }}
         />,
       )
         .find('List')

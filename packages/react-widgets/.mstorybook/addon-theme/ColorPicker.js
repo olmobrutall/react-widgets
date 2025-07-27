@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import * as React from 'react'
+import { useState } from 'react'
 import { css } from 'astroturf'
 import { ChromePicker } from 'react-color'
 import usePopper from 'react-overlays/usePopper'

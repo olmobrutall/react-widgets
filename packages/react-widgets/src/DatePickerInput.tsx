@@ -1,4 +1,5 @@
-import React, { useMemo, useRef, useState } from 'react'
+import * as React from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { isNullOrInvalid } from './dates'
 import Input, { InputProps } from './Input'
 import { Localizer, RequiredDateMethods } from './Localization'
@@ -43,10 +44,10 @@ const DatePickerInput = React.forwardRef(
       () =>
         value instanceof Date && isValid(value)
           ? localizer.formatDate(
-              value,
-              formatter,
-              editing ? editFormat : displayFormat,
-            )
+            value,
+            formatter,
+            editing ? editFormat : displayFormat,
+          )
           : '',
       [value, formatter, localizer, displayFormat, editing, editFormat],
     )

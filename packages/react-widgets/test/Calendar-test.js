@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { mount } from 'enzyme'
 
 import Calendar from '../src/Calendar'
@@ -213,7 +213,7 @@ describe('Calendar', () => {
     let focused = mount(
       <Calendar
         currentDate={new Date(2000, 1, 15)}
-        onCurrentDateChange={() => {}}
+        onCurrentDateChange={() => { }}
       />,
     )
       .assertSingle('MonthView')

@@ -13,7 +13,7 @@ export const setActiveDescendant = (ref: Element | null, activeId: string) => {
 }
 
 export const useActiveDescendant = (
-  ref: RefObject<Element>,
+  ref: RefObject<Element | null>,
   id: string,
   visible: boolean | null | undefined,
   deps: any[],

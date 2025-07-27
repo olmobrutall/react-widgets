@@ -1,16 +1,5 @@
-import PropTypes from 'prop-types'
-import React from 'react'
-import * as CustomPropTypes from './PropTypes'
+import * as React from 'react'
 
-const propTypes = {
-  value: PropTypes.string,
-  placeholder: PropTypes.string,
-  maxLength: PropTypes.number,
-  onChange: PropTypes.func.isRequired,
-
-  disabled: CustomPropTypes.disabled,
-  readOnly: CustomPropTypes.disabled,
-}
 
 const MultiselectInput = React.forwardRef(
   (
@@ -39,6 +28,5 @@ const MultiselectInput = React.forwardRef(
 )
 
 MultiselectInput.displayName = 'MultiselectInput'
-MultiselectInput.propTypes = propTypes
 
 export default MultiselectInput

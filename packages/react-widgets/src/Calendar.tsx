@@ -1,7 +1,7 @@
 import cn from 'classnames'
 import { DateUnit } from 'date-arithmetic'
-import PropTypes from 'prop-types'
-import React, { useEffect, useRef } from 'react'
+import * as React from 'react'
+import { useEffect, useRef } from 'react'
 import { useUncontrolledProp } from 'uncontrollable'
 import CalendarHeader from './CalendarHeader'
 import Century from './Century'
@@ -70,178 +70,6 @@ function inRangeValue(_value: Date | undefined | null, min: Date, max: Date) {
   return dates.max(dates.min(value, max), min)
 }
 
-const propTypes = {
-  /**
-   * @example ['disabled', ['new Date()']]
-   */
-  disabled: PropTypes.bool,
-  /**
-   * @example ['readOnly', ['new Date()']]
-   */
-  readOnly: PropTypes.bool,
-
-  /**
-   * @example ['onChangePicker', [ ['new Date()'] ]]
-   */
-  onChange: PropTypes.func,
-
-  /**
-   * The selected Date.
-   *
-   * ```tsx live
-   * import { Calendar } from 'react-widgets';
-   *
-   * <Calendar value={new Date()} />
-   * ```
-   * @example false
-   */
-  value: PropTypes.instanceOf(Date),
-
-  /**
-   * The minimum date that the Calendar can navigate from.
-   *
-   * @example ['prop', ['min', 'new Date()']]
-   */
-  min: PropTypes.instanceOf(Date),
-
-  /**
-   * The maximum date that the Calendar can navigate to.
-   *
-   * @example ['prop', ['max', 'new Date()']]
-   */
-  max: PropTypes.instanceOf(Date),
-
-  /**
-   * Default current date at which the calendar opens. If none is provided, opens at today's date or the `value` date (if any).
-   */
-  currentDate: PropTypes.instanceOf(Date),
-
-  /**
-   * Change event Handler that is called when the currentDate is changed. The handler is called with the currentDate object.
-   */
-  onCurrentDateChange: PropTypes.func,
-
-  /** Specify the navigate into the past header icon */
-  navigatePrevIcon: PropTypes.node,
-
-  /** Specify the navigate into the future header icon */
-  navigateNextIcon: PropTypes.node,
-
-  /**
-   * Controls the currently displayed calendar view. Use `defaultView` to set a unique starting view.
-   *
-   * @type {("month"|"year"|"decade"|"century")}
-   * @controllable onViewChange
-   */
-  view(props: any, ...args: any[]) {
-    // @ts-ignore
-    return PropTypes.oneOf(props.views || VIEW_OPTIONS)(props, ...args)
-  },
-
-  /**
-   * Defines a list of views the Calendar can traverse through, starting with the
-   * first in the list to the last.
-   *
-   * @type array<"month"|"year"|"decade"|"century">
-   */
-  views: PropTypes.arrayOf(PropTypes.oneOf(VIEW_OPTIONS)),
-
-  /**
-   * A callback fired when the `view` changes.
-   *
-   * @controllable view
-   */
-  onViewChange: PropTypes.func,
-
-  /**
-   * Callback fired when the Calendar navigates between views, or forward and backwards in time.
-   *
-   * @type function(date: ?Date, direction: string, view: string)
-   */
-  onNavigate: PropTypes.func,
-  culture: PropTypes.string,
-  autoFocus: PropTypes.bool,
-
-  /**
-   * Show or hide the Calendar footer.
-   *
-   * @example ['prop', ['footer', true]]
-   */
-  footer: PropTypes.bool,
-
-  /**
-   * Provide a custom component to render the days of the month. The Component is provided the following props
-   *
-   * - `date`: a `Date` object for the day of the month to render
-   * - `label`: a formatted `string` of the date to render. To adjust the format of the `label` string use the `dateFormat` prop, listed below.
-   */
-  renderDay: PropTypes.func,
-
-  formats: PropTypes.shape({
-    /**
-     * A formatter for the header button of the month view.
-     *
-     * @example ['dateFormat', ['headerFormat', "{ date: 'medium' }"]]
-     */
-    header: PropTypes.any,
-
-    /**
-     * A formatter for the Calendar footer, formats today's Date as a string.
-     *
-     * @example ['dateFormat', ['footerFormat', "{ date: 'medium' }", "date => 'Today is: ' + formatter(date)"]]
-     */
-    footer: PropTypes.any,
-
-    /**
-     * A formatter calendar days of the week, the default formats each day as a Narrow name: "Mo", "Tu", etc.
-     *
-     * @example ['prop', { day: "day => \n['🎉', 'M', 'T','W','Th', 'F', '🎉'][day.getDay()]" }]
-     */
-    day: PropTypes.any,
-
-    /**
-     * A formatter for day of the month
-     *
-     * @example ['prop', { date: "dt => String(dt.getDate())" }]
-     */
-    date: PropTypes.any,
-
-    /**
-     * A formatter for month name.
-     *
-     * @example ['dateFormat', ['monthFormat', "{ raw: 'MMMM' }", null, { defaultView: '"year"' }]]
-     */
-    month: PropTypes.any,
-
-    /**
-     * A formatter for month name.
-     *
-     * @example ['dateFormat', ['yearFormat', "{ raw: 'yy' }", null, { defaultView: '"decade"' }]]
-     */
-    year: PropTypes.any,
-
-    /**
-     * A formatter for decade, the default formats the first and last year of the decade like: 2000 - 2009.
-     */
-    decade: PropTypes.any,
-
-    /**
-     * A formatter for century, the default formats the first and last year of the century like: 1900 - 1999.
-     */
-    century: PropTypes.any,
-  }),
-
-  messages: PropTypes.shape({
-    moveBack: PropTypes.string,
-    moveForward: PropTypes.string,
-  }),
-
-  onKeyDown: PropTypes.func,
-
-  /** @ignore */
-  tabIndex: PropTypes.any,
-}
-
 const useViewState = (views: View[], view = views[0], currentDate: Date) => {
   const lastView = useRef(view)
   const lastDate = useRef(currentDate)
@@ -266,7 +94,7 @@ type View = 'month' | 'year' | 'decade' | 'century'
 
 export interface CalendarProps<TLocalizer = unknown>
   extends WidgetHTMLProps,
-    WidgetProps {
+  WidgetProps {
   bordered?: boolean
   views?: View[]
   disabled?: boolean
@@ -631,8 +459,6 @@ function dateOrNull(dt?: Date | null) {
 }
 
 Calendar.displayName = 'Calendar'
-
-Calendar.propTypes = propTypes
 
 // Calendar.defaultProps = {
 //   min: new Date(1900, 0, 1),

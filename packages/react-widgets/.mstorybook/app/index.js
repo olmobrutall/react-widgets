@@ -1,5 +1,6 @@
 import './styles.css'
-import React, {
+import * as React from 'react'
+import {
   useState,
   useEffect,
   useMemo,

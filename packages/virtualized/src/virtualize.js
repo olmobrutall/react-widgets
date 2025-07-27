@@ -1,8 +1,7 @@
-import React from 'react'
+import * as React from 'react'
 
 import VirtualList, {
   getVirtualListProps,
-  virtualListPropTypes,
 } from './VirtualList'
 
 export default function virtualize(Widget) {
@@ -11,8 +10,6 @@ export default function virtualize(Widget) {
 
   return class extends React.Component {
     static displayName = `Virtual${name}`
-
-    static propTypes = virtualListPropTypes
 
     render() {
       const { listProps, props } = getVirtualListProps(this.props)

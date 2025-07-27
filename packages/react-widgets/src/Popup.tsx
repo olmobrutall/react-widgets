@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import React from 'react'
+import * as React from 'react'
 import SlideDownTransition from './SlideDownTransition'
 import { TransitionProps } from 'react-transition-group/Transition'
 

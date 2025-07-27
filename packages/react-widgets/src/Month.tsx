@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import React from 'react'
+import * as React from 'react'
 import CalendarView, { CalendarViewProps } from './CalendarView'
 import { Localizer } from './Localization'
 import { RenderProp } from './types'
