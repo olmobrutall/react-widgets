@@ -1,23 +1,18 @@
+const path = require('path');
+
 module.exports = {
-  purge: [
+  content: [
     './docs/**/*.{js,ts,tsx,mdx}',
     './src/**/*.{js,ts,tsx}',
-    './src/**/*.html',
-    '../react-widgets/src/**/*.tsx',
+    '../react-widgets/src/**/*.{js,ts,tsx}',
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    colors: {},
-    flexGrow: {
-      0: 0,
-      DEFAULT: 1,
-      1: 1,
-      2: 2,
+    extend: {
+      flexGrow: {
+        2: '2',
+      },
     },
-    extend: {},
-  },
-  variants: {
-    extend: {},
   },
   plugins: [],
   corePlugins: {
@@ -32,4 +27,4 @@ module.exports = {
     ringOffsetColor: false,
     textColor: false,
   },
-}
+};

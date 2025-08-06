@@ -1,10 +1,11 @@
 @forward './list.scss' as list-* hide List;
 @forward './multiselect.scss' as multiselect-* hide Multiselect;
-@forward './calendar.scss'  as calendar-* hide Calendar;
+@forward './calendar.scss' as calendar-* hide Calendar;
 @forward './popup.scss' as popup-* hide Popup;
 
 @use './variables.scss' as v;
-
+@use 'sass:list' as listf;
+@use 'sass:map';
 @use './widget.scss';
 @use './list.scss';
 @use './listbox.scss';
@@ -20,28 +21,22 @@
 $_graph: (
   'List': (),
   'Popup': (),
-  'Listbox': (
-    'List',
+  'Listbox': ('List',
   ),
-  'DropdownList': (
-    'List',
+  'DropdownList': ('List',
     'Popup',
   ),
-  'Combobox': (
-    'List',
+  'Combobox': ('List',
     'Popup',
   ),
-  'Autocomplete': (
-    'List',
+  'Autocomplete': ('List',
     'Popup',
     'Combobox',
   ),
-  'Multiselect': (
-    'List',
+  'Multiselect': ('List',
     'Popup',
   ),
-  'DatePicker': (
-    'Popup',
+  'DatePicker': ('Popup',
     'Calendar',
   ),
   'Calendar': (),
@@ -52,58 +47,73 @@ $_graph: (
 //
 // Largely unnecessary Toposort
 // --------------------------------
-$_visited: ();
-@function _sort($node) {
-  $result: ();
-  $deps: map-get($_graph, $node);
+$_visited: (
+);
 
-  @each $dep in $deps {
-    @if not index($_visited, $dep) {
-      $result: join($result, _sort($dep));
-    }
+@function _sort($node) {
+  $result: (
+  );
+$deps: map.get($_graph, $node);
+
+@each $dep in $deps {
+  @if not listf.index($_visited, $dep) {
+    $result: listf.join($result, _sort($dep));
   }
-  $_visited: append($_visited, $node) !global;
-  @return append($result, $node);
 }
 
-$_components: ();
+$_visited: listf.append($_visited, $node) !global;
+@return listf.append($result, $node);
+}
+
+$_components: (
+);
+
 @each $node, $_ in $_graph {
-  @if index(v.$components, $node) and not index($_visited, $node) {
-    $_components: join($_components, _sort($node));
+  @if listf.index(v.$components, $node) and not listf.index($_visited, $node) {
+    $_components: listf.join($_components, _sort($node));
   }
 }
 
 // @debug 'Including: #{$_components}';
 
 @each $mod in $_components {
-  @if $mod == 'List' {
+  @if $mod =='List' {
     @include list.List();
   }
-  @if $mod == 'Popup' {
+
+  @if $mod =='Popup' {
     @include popup.Popup();
   }
-  @if $mod == 'Listbox' {
+
+  @if $mod =='Listbox' {
     @include listbox.Listbox();
   }
-  @if $mod == 'DropdownList' {
+
+  @if $mod =='DropdownList' {
     @include dropdown-list.DropdownList();
   }
-  @if $mod == 'Combobox' {
+
+  @if $mod =='Combobox' {
     @include combobox.Combobox();
   }
-  @if $mod == 'Multiselect' {
+
+  @if $mod =='Multiselect' {
     @include multiselect.Multiselect();
   }
-  @if $mod == 'NumberPicker' {
+
+  @if $mod =='NumberPicker' {
     @include number-picker.NumberPicker();
   }
-  @if $mod == 'Calendar' {
+
+  @if $mod =='Calendar' {
     @include calendar.Calendar();
   }
-  @if $mod == 'DatePicker' {
+
+  @if $mod =='DatePicker' {
     @include date-picker.DateTimePicker();
   }
-  @if $mod == 'TimeInput' {
+
+  @if $mod =='TimeInput' {
     @include time-input.TimeInput();
   }
 }
