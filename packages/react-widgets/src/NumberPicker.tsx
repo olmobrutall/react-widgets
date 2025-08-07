@@ -12,6 +12,7 @@ import useFocusManager from './useFocusManager'
 import { notify } from './WidgetHelpers'
 import { WidgetHTMLProps } from './shared'
 import useEventCallback from '@restart/hooks/useEventCallback'
+import { omitUndefined } from './omitUndefined'
 
 // my tests in ie11/chrome/FF indicate that keyDown repeats
 // at about 35ms+/- 5ms after an initial 500ms delay. callback fires on the leading edge
@@ -199,7 +200,7 @@ function NumberPicker(uncontrolledProps: NumberPickerProps) {
     precision,
     step: pStep,
     ...elementProps
-  } = useUncontrolled({ ...defaultProps, ...uncontrolledProps }, { value: 'onChange' });
+  } = useUncontrolled({ ...defaultProps, ...omitUndefined(uncontrolledProps) }, { value: 'onChange' });
 
   const localizer = useLocalizer(messages, { number: format })
 

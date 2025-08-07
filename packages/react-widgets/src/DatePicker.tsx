@@ -20,6 +20,8 @@ import { TransitionProps } from 'react-transition-group/Transition'
 import { WidgetHTMLProps, InferFormat } from './shared'
 import useEventCallback from '@restart/hooks/useEventCallback'
 import InputAddon from './InputAddon'
+import { SlideDownTransitionProps } from './SlideDownTransition'
+import { omitUndefined } from './omitUndefined'
 
 const defaultProps: Partial<CalendarProps> = {
   ...(Calendar as any).defaultProps,
@@ -34,7 +36,7 @@ export interface DatePickerProps<TLocalizer = unknown>
   extends Omit<WidgetHTMLProps, 'onChange' | 'defaultValue'>,
   Omit<WidgetProps, 'onChange' | 'onSelect' | 'defaultValue' | 'onToggle'> {
 
-  ref: React.Ref<DatePickerHandle>,
+  ref?: React.Ref<DatePickerHandle>,
 
   /**
    * @example ['valuePicker', [ ['new Date()', null] ]]
@@ -109,7 +111,7 @@ export interface DatePickerProps<TLocalizer = unknown>
   dropUp?: boolean
 
   popupProps?: object
-  popupTransition?: React.ComponentType<TransitionProps>
+  popupTransition?: React.ComponentType<SlideDownTransitionProps>
   popupComponent?: React.ComponentType<PopupProps>
 
   placeholder?: string
@@ -218,7 +220,7 @@ function DatePicker(props: DatePickerProps) {
     'aria-describedby': ariaDescribedby,
     ref: outerRef,
     ...elementProps
-  } = useUncontrolled({ ...defaultProps, ...props }, {
+  } = useUncontrolled({ ...defaultProps, ...omitUndefined(props) }, {
     open: 'onToggle',
     value: 'onChange',
     currentDate: 'onCurrentDateChange',
@@ -362,7 +364,7 @@ function DatePicker(props: DatePickerProps) {
   function inRangeValue(value: Date | null | undefined) {
     if (value == null) return value
 
-    return dates.max(dates.min(value, max!), min!)
+    return dates.max(dates.min(value, (max ?? null)!), (min ?? null)!)
   }
 
   function formatDate(date: Date) {

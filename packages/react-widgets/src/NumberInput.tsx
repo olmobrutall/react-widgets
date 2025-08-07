@@ -5,6 +5,7 @@ import { createRef, FocusEvent, SyntheticEvent } from 'react'
 import Input from './Input'
 import { Localizer } from './Localization'
 import { mergeRefs } from '@restart/hooks/useMergedRefs'
+import { omitUndefined } from './omitUndefined'
 
 let isSign = (val: string) => (val || '').trim() === '-'
 
@@ -135,7 +136,7 @@ class NumberPickerInput extends React.Component<
   }
 
   handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-    let { value, onChange } = { ...defaultProps, ...this.props };
+    let { value, onChange } = { ...defaultProps, ...omitUndefined(this.props) };
 
     let stringValue = (event.target as HTMLInputElement).value,
       numberValue = this.parseNumber(stringValue)
@@ -202,7 +203,7 @@ class NumberPickerInput extends React.Component<
       editing: __,
       parse: _a,
       ...props
-    } = { ...defaultProps, ...this.props };
+    } = { ...defaultProps, ...omitUndefined(this.props) };
 
     let value = this.state.stringValue
 

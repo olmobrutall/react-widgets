@@ -72,7 +72,7 @@ class SlideDownTransition extends React.Component<SlideDownTransitionProps> {
     if (this.props.onExited) this.props.onExited()
   }
 
-  handleTransitionEnd = (done: () => void) => {
+  handleTransitionEnd = (_: HTMLElement, done: () => void) => {
     transitionEnd(this.nodeRef.current!.firstChild as HTMLElement, done)
   }
 
@@ -81,7 +81,6 @@ class SlideDownTransition extends React.Component<SlideDownTransitionProps> {
 
     return (
       <Transition
-        {...props}
         appear
         in={this.props.in}
         nodeRef={this.nodeRef}
@@ -93,10 +92,10 @@ class SlideDownTransition extends React.Component<SlideDownTransitionProps> {
         addEndListener={this.handleTransitionEnd}
         timeout={undefined as any /*hack*/}
       >
-        {(status: TransitionStatus, innerProps: any) => (
+        {(status: TransitionStatus) => (
           <div
-            {...innerProps}
-            ref={this.nodeRef}
+            {...props}
+            ref={this.nodeRef as React.RefObject<HTMLDivElement>}
             className={cn(
               className,
               dropUp && 'rw-dropup',

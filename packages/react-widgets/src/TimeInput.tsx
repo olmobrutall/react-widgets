@@ -9,6 +9,7 @@ import { times } from './Icon'
 import Widget, { WidgetProps } from './Widget'
 import dates from './dates'
 import useFocusManager from './useFocusManager'
+import { omitUndefined } from './omitUndefined'
 
 type Meridiem = 'AM' | 'PM'
 
@@ -190,7 +191,7 @@ export default function TimeInput(uncontrolledProps: TimeInputProps) {
     onBlur,
     onFocus,
     ...props
-  } = useUncontrolled({ ...defaultProps, ...uncontrolledProps }, { value: 'onChange' })
+  } = useUncontrolled({ ...defaultProps, ...omitUndefined(uncontrolledProps) }, { value: 'onChange' })
 
   let minsAddon =
     minutesAddon !== undefined

@@ -1,7 +1,8 @@
 import cn from 'classnames'
 import * as React from 'react'
-import SlideDownTransition from './SlideDownTransition'
-import { TransitionProps } from 'react-transition-group/Transition'
+import SlideDownTransition, { SlideDownTransitionProps } from './SlideDownTransition'
+import { TransitionProps } from './Transition'
+// import { TransitionProps } from 'react-transition-group/Transition'
 
 export interface StaticContainerProps {
   children: React.ReactNode
@@ -23,7 +24,7 @@ export interface PopupProps {
   onExit?: () => void
   onExited?: () => void
   onExiting?: () => void
-  transition?: React.ComponentType<TransitionProps>
+  transition?: React.ComponentType<SlideDownTransitionProps>
   role?: string
   id?: string
   children: React.ReactNode
@@ -51,7 +52,7 @@ const Popup = React.forwardRef(
         {...props}
         in={open}
         dropUp={dropUp}
-        timeout={undefined! /**hack*/}
+        // timeout={undefined! /**hack*/}
         className={cn('rw-popup-container', className)}
       >
         <div id={id} className="rw-popup" ref={ref} role={role}>

@@ -1,6 +1,7 @@
 import cn from 'classnames'
 import transitionEnd from 'dom-helpers/transitionEnd'
 import * as React from 'react'
+import { omitUndefined } from './omitUndefined'
 
 
 const prefix = 'rw-calendar-transition'
@@ -100,7 +101,7 @@ class SlideTransitionGroup extends React.Component<
   }
 
   render() {
-    let { direction, children, onTransitionEnd: _, ...props } = { ...defaultProps, ...this.props };
+    let { direction, children, onTransitionEnd: _, ...props } = { ...defaultProps, ...omitUndefined(this.props) };
 
     if (!this.isTransitioning) {
       if ((this.current as any).key !== (children as any).key) {
@@ -130,5 +131,6 @@ class SlideTransitionGroup extends React.Component<
     )
   }
 }
+
 
 export default SlideTransitionGroup

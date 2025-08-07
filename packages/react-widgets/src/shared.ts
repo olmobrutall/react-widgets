@@ -32,6 +32,7 @@ import {
 } from './List'
 import { TextAccessor, DataKeyAccessor } from './Accessors'
 import { PopupProps } from './Popup'
+import { SlideDownTransitionProps } from './SlideDownTransition'
 
 export interface WidgetProps {
   className?: string
@@ -174,7 +175,7 @@ export interface PopupWidgetProps {
 
   dropUp?: boolean
   popupProps?: Record<string, any>
-  popupTransition?: React.ComponentType<TransitionProps>
+  popupTransition?: React.ComponentType<SlideDownTransitionProps>
   popupComponent?: React.ComponentType<PopupProps>
 
   onKeyPress?: KeyboardEventHandler<HTMLDivElement>
