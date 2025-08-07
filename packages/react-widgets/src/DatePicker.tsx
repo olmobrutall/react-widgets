@@ -21,7 +21,7 @@ import { WidgetHTMLProps, InferFormat } from './shared'
 import useEventCallback from '@restart/hooks/useEventCallback'
 import InputAddon from './InputAddon'
 
-const defaultProps = {
+const defaultProps: Partial<CalendarProps> = {
   ...(Calendar as any).defaultProps,
 
   min: new Date(1900, 0, 1),
@@ -218,7 +218,7 @@ function DatePicker(props: DatePickerProps) {
     'aria-describedby': ariaDescribedby,
     ref: outerRef,
     ...elementProps
-  } = useUncontrolled(props, {
+  } = useUncontrolled({ ...defaultProps, ...props }, {
     open: 'onToggle',
     value: 'onChange',
     currentDate: 'onCurrentDateChange',
@@ -465,7 +465,7 @@ function DatePicker(props: DatePickerProps) {
             <TimeInput
               {...timeInputProps}
               value={value}
-              precision={timePrecision}
+              precision={timePrecision!}
               onChange={handleTimeChange}
               datePart={currentDate}
             />
@@ -477,6 +477,5 @@ function DatePicker(props: DatePickerProps) {
 }
 
 DatePicker.displayName = 'DatePicker'
-DatePicker.defaultProps = defaultProps
 
 export default DatePicker

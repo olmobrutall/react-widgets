@@ -43,7 +43,7 @@ function clamp(value: number | null | undefined, min: number, max: number) {
   )
 }
 
-const defaultProps = {
+const defaultProps: Partial<NumberPickerProps> = {
   incrementIcon: caretUp,
   decrementIcon: caretDown,
 
@@ -199,7 +199,7 @@ function NumberPicker(uncontrolledProps: NumberPickerProps) {
     precision,
     step: pStep,
     ...elementProps
-  } = useUncontrolled(uncontrolledProps, { value: 'onChange' })
+  } = useUncontrolled({ ...defaultProps, ...uncontrolledProps }, { value: 'onChange' });
 
   const localizer = useLocalizer(messages, { number: format })
 
@@ -391,7 +391,7 @@ function NumberPicker(uncontrolledProps: NumberPickerProps) {
   )
 }
 
-(NumberPicker as any).defaultProps = defaultProps;
+//(NumberPicker as any).defaultProps = defaultProps;
 
 export default NumberPicker
 

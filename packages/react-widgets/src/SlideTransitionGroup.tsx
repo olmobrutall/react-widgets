@@ -25,13 +25,15 @@ interface SlideTransitionGroupState {
   currentClasses: string
 }
 
+const defaultProps: Partial<SlideTransitionGroupProps> = {
+  direction: 'left',
+}
+
 class SlideTransitionGroup extends React.Component<
   SlideTransitionGroupProps,
   SlideTransitionGroupState
 > {
-  static defaultProps = {
-    direction: 'left',
-  }
+
 
   isTransitioning?: boolean
   container: React.RefObject<HTMLDivElement | null>
@@ -98,7 +100,7 @@ class SlideTransitionGroup extends React.Component<
   }
 
   render() {
-    let { direction, children, onTransitionEnd: _, ...props } = this.props
+    let { direction, children, onTransitionEnd: _, ...props } = { ...defaultProps, ...this.props };
 
     if (!this.isTransitioning) {
       if ((this.current as any).key !== (children as any).key) {

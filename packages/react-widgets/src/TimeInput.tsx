@@ -131,7 +131,7 @@ export interface TimeInputProps
 }
 
 
-const defaultProps = {
+const defaultProps: Partial<TimeInputProps> = {
   hoursAddon: ':',
   padValues: true,
   precision: 'minutes',
@@ -170,7 +170,7 @@ function useTimePartState(value: Date | null, use12HourClock: boolean) {
   return [state.timeParts, setTimeParts] as const
 }
 
-function TimeInput(uncontrolledProps: TimeInputProps) {
+export default function TimeInput(uncontrolledProps: TimeInputProps) {
   const {
     value,
     use12HourClock,
@@ -190,7 +190,7 @@ function TimeInput(uncontrolledProps: TimeInputProps) {
     onBlur,
     onFocus,
     ...props
-  } = useUncontrolled(uncontrolledProps, { value: 'onChange' })
+  } = useUncontrolled({ ...defaultProps, ...uncontrolledProps }, { value: 'onChange' })
 
   let minsAddon =
     minutesAddon !== undefined
@@ -524,6 +524,3 @@ function TimeInput(uncontrolledProps: TimeInputProps) {
   )
 }
 
-TimeInput.defaultProps = defaultProps
-
-export default TimeInput

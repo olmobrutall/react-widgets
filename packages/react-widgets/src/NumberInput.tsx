@@ -58,15 +58,17 @@ interface NumberPickerInputSnapshot {
   reselectText?: boolean
 }
 
+const defaultProps: Partial<NumberPickerInputProps> = {
+  value: null,
+  editing: false,
+}
+
 class NumberPickerInput extends React.Component<
   NumberPickerInputProps,
   NumberPickerInputState,
   NumberPickerInputSnapshot
 > {
-  static defaultProps = {
-    value: null,
-    editing: false,
-  }
+
 
   state: NumberPickerInputState = {}
 
@@ -84,7 +86,7 @@ class NumberPickerInput extends React.Component<
     nextProps: NumberPickerInputProps,
     prevState: NumberPickerInputState,
   ) {
-    let { value, editing, localizer } = nextProps
+    let { value, editing, localizer } = { ...defaultProps, ...nextProps };
 
     let decimal = localizer.decimalCharacter()
 
@@ -133,7 +135,7 @@ class NumberPickerInput extends React.Component<
   }
 
   handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-    let { value, onChange } = this.props
+    let { value, onChange } = { ...defaultProps, ...this.props };
 
     let stringValue = (event.target as HTMLInputElement).value,
       numberValue = this.parseNumber(stringValue)
@@ -200,7 +202,7 @@ class NumberPickerInput extends React.Component<
       editing: __,
       parse: _a,
       ...props
-    } = this.props
+    } = { ...defaultProps, ...this.props };
 
     let value = this.state.stringValue
 
