@@ -1,6 +1,6 @@
 {
   "name": "react-widgets-up",
-  "version": "6.0.7",
+  "version": "6.0.12",
   "description": "An à la carte set of polished, extensible, and accessible inputs built for React",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
@@ -48,6 +48,7 @@
     "build": "yarn build:lib && yarn build:dist",
     "start": "mini-storybook start",
     "prepublishOnly": "yarn build && file-butler prepare-publish-dir lib",
+    "publish": "/*cd lib && npm publish*/",
     "storybook": "mini-storybook start"
   },
   "homepage": "https://jquense.github.io/react-widgets/",
@@ -67,7 +68,6 @@
   "dependencies": {
     "@restart/hooks": "^0.4.5",
     "@types/classnames": "^2.3.1",
-    "@types/react-transition-group": "^4.4.4",
     "classnames": "^2.3.1",
     "date-arithmetic": "^4.0.1",
     "dom-helpers": "^5.2.1",
