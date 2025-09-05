@@ -83,7 +83,7 @@ $cell-border-radius: $btn-border-radius !default;
 
   .rw-cell,
   .rw-calendar-btn {
-    background-clip: var(--rw-widget-background-clip);
+    background-clip: $widget-background-clip;
 
     @include mixins.focus();
 
