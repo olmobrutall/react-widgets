@@ -43,9 +43,9 @@ $cell-border-radius: $btn-border-radius !default;
   --rw-cell-active-border-color: var(--rw-btn-active-border-color);
   --rw-cell-active-color: var(--rw-btn-active-color);
 
-  --rw-cell-select-color: var(--rw-selected-color);
-  --rw-cell-select-border-color: var(--rw-selected-border-color);
-  --rw-cell-select-bg: var(--rw-selected-bg);
+  --rw-cell-select-color: var(--rw-list-selected-color);
+  --rw-cell-select-border-color: var(--rw-list-selected-border-color);
+  --rw-cell-select-bg: var(--rw-list-selected-bg);
 }
 
 @mixin _translate($x, $y) {
