@@ -2,8 +2,8 @@
 
 $widget-offset: 2px !default;
 $max-height: 250px;
-$bg: $widget-bg !default;
-$border: $widget-border-color !default;
+$bg: var(--rw-widget-bg);
+$border: var(--rw-widget-border-color);
 $border-radius: $widget-border-radius !default;
 $box-shadow-offset: 1em !default;
 $box-shadow: 0 0.5em 1em rgba(#000, 0.175) !default;

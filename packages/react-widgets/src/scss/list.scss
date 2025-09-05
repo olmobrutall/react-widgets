@@ -1,32 +1,25 @@
 @use './variables.scss' as *;
 
-$color: $widget-color !default;
+:root {
+  --rw-list-color: var(--rw-widget-color);
+  --rw-list-hover-bg: var(--rw-widget-hover-bg);
+  --rw-list-hover-border-color: var(--rw-widget-hover-border-color);
+  --rw-list-hover-color: var(--rw-widget-hover-color);
+  --rw-list-selected-bg: #007bff;
+  --rw-list-selected-border-color: #007bff;
+  --rw-list-selected-color: #fff;
+  --rw-list-disabled-bg: transparent;
+  --rw-list-disabled-border-color: transparent;
+  --rw-list-disabled-color: var(--rw-gray-300);
+  --rw-list-option-muted-color: var(--rw-gray-400);
+  --rw-list-option-create-bg: var(--rw-widget-bg);
+  --rw-list-optgroup-color: null;
+}
+
 $font-size: $widget-font-size !default;
 $padding-y: 0.5em !default;
-
-$_hover-bg: $widget-hover-bg;
-$_hover-border-color: $widget-hover-border-color;
-$_hover-color: $widget-hover-color;
-
-$focus-bg: $_hover-bg !default;
-$focus-border-color: $_hover-border-color !default;
-$focus-color: $_hover-color !default;
-
-$selected-bg: #007bff !default;
-$selected-border-color: $selected-bg !default;
-$selected-color: #fff !default;
-
-$disabled-bg: transparent !default;
-$disabled-border-color: transparent !default;
-$disabled-color: $gray-300 !default;
-
 $option-padding-y: 0.25em !default;
 $option-padding-x: 1.5em !default;
-$option-muted-color: $gray-400 !default;
-
-$option-create-bg: $widget-bg !default;
-
-$optgroup-color: null !default;
 $optgroup-font-weight: bold !default;
 
 @mixin List() {
@@ -45,29 +38,29 @@ $optgroup-font-weight: bold !default;
 
   .rw-list-option {
     user-select: none;
-    color: $color;
+    color: var(--rw-list-color);
     cursor: pointer;
     border: 1px solid transparent;
     background-clip: $widget-background-clip;
 
     &:hover,
     [data-intent='keyboard'] &.rw-state-focus:not(.rw-state-selected) {
-      background-color: $focus-bg;
-      border-color: $focus-border-color;
-      color: $focus-color;
+      background-color: var(--rw-list-hover-bg);
+      border-color: var(--rw-list-hover-border-color);
+      color: var(--rw-list-hover-color);
     }
 
     &.rw-state-selected {
-      background-color: $selected-bg;
-      border-color: $selected-border-color;
-      color: $selected-color;
+      background-color: var(--rw-list-selected-bg);
+      border-color: var(--rw-list-selected-border-color);
+      color: var(--rw-list-selected-color);
     }
 
     &.rw-state-disabled {
       cursor: not-allowed; // required to override the cursor above
-      background-color: $disabled-bg;
-      border-color: $disabled-border-color;
-      color: $disabled-color;
+      background-color: var(--rw-list-disabled-bg);
+      border-color: var(--rw-list-disabled-border-color);
+      color: var(--rw-list-disabled-color);
     }
   }
 
@@ -80,11 +73,11 @@ $optgroup-font-weight: bold !default;
 
   .rw-list-empty {
     text-align: center;
-    color: $option-muted-color;
+    color: var(--rw-list-option-muted-color);
   }
 
   .rw-list-optgroup {
-    color: $optgroup-color;
+    color: var(--rw-list-optgroup-color);
     font-weight: $optgroup-font-weight;
     padding-top: 7px;
   }

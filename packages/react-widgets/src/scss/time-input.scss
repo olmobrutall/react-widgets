@@ -6,8 +6,8 @@
     display: inline-flex;
     min-height: $input-height;
     align-items: center;
-    background-color: $input-bg;
-    border: $input-border-color $input-border-width solid;
+    background-color: var(--rw-input-bg);
+    border: var(--rw-input-border-color) $input-border-width solid;
     border-radius: $input-border-radius;
     outline: none;
     cursor: text;

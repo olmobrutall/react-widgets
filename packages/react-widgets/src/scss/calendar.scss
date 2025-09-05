@@ -2,43 +2,51 @@
 @use './mixins.scss';
 @use './list.scss' as list;
 
-$bg: $widget-bg !default;
-
-$btn-bg: #fff !default;
-$btn-color: $widget-color !default;
-$btn-border-color: null !default;
-$btn-muted-color: $gray-400;
+// Restore non-color SCSS variables
 $btn-border-radius: $widget-border-radius !default;
-
-$btn-hover-bg: $widget-hover-bg !default;
-$btn-hover-border-color: $widget-hover-border-color !default;
-$btn-hover-color: $widget-hover-color !default;
-
-$btn-active-color: null !default;
-$btn-active-border-color: null !default;
-$btn-active-bg: $gray-300 !default;
-
-$btn-focus-color: null !default;
-$btn-focus-border-color: null !default;
-$btn-focus-bg: null !default;
-
 $cell-align: center !default;
 $cell-padding: 0.25em !default;
-$cell-color: $btn-color !default;
-$cell-border-color: null !default;
 $cell-border-radius: $btn-border-radius !default;
 
-$cell-hover-bg: $btn-hover-bg !default;
-$cell-hover-border-color: $btn-hover-border-color !default;
-$cell-hover-color: $btn-hover-color !default;
+// Define CSS variables with --rw- prefix, keeping relationships
+:root {
+  --rw-bg: var(--rw-widget-bg);
+  --rw-btn-bg: #fff;
+  --rw-btn-color: var(--rw-widget-color);
+  --rw-btn-border-color: null;
+  --rw-btn-muted-color: var(--rw-gray-400);
+  --rw-btn-border-radius: var(--rw-widget-border-radius);
 
-$cell-active-bg: $btn-active-bg !default;
-$cell-active-border-color: $btn-active-border-color !default;
-$cell-active-color: $btn-active-color !default;
+  --rw-btn-hover-bg: var(--rw-widget-hover-bg);
+  --rw-btn-hover-border-color: var(--rw-widget-hover-border-color);
+  --rw-btn-hover-color: var(--rw-widget-hover-color);
 
-$cell-select-color: list.$selected-color !default;
-$cell-select-border-color: list.$selected-border-color !default;
-$cell-select-bg: list.$selected-bg !default;
+  --rw-btn-active-color: null;
+  --rw-btn-active-border-color: null;
+  --rw-btn-active-bg: var(--rw-gray-300);
+
+  --rw-btn-focus-color: null;
+  --rw-btn-focus-border-color: null;
+  --rw-btn-focus-bg: null;
+
+  --rw-cell-align: center;
+  --rw-cell-padding: 0.25em;
+  --rw-cell-color: var(--rw-btn-color);
+  --rw-cell-border-color: null;
+  --rw-cell-border-radius: var(--rw-btn-border-radius);
+
+  --rw-cell-hover-bg: var(--rw-btn-hover-bg);
+  --rw-cell-hover-border-color: var(--rw-btn-hover-border-color);
+  --rw-cell-hover-color: var(--rw-btn-hover-color);
+
+  --rw-cell-active-bg: var(--rw-btn-active-bg);
+  --rw-cell-active-border-color: var(--rw-btn-active-border-color);
+  --rw-cell-active-color: var(--rw-btn-active-color);
+
+  --rw-cell-select-color: var(--rw-selected-color);
+  --rw-cell-select-border-color: var(--rw-selected-border-color);
+  --rw-cell-select-bg: var(--rw-selected-bg);
+}
 
 @mixin _translate($x, $y) {
   transform: translate(#{$x}, #{$y});
@@ -60,9 +68,9 @@ $cell-select-bg: list.$selected-bg !default;
   }
 
   .rw-calendar-contained {
-    border-radius: $widget-border-radius;
-    background-color: $bg;
-    border: $widget-border-color 1px solid;
+    border-radius: var(--rw-widget-border-radius);
+    background-color: var(--rw-bg);
+    border: var(--rw-widget-border-color) 1px solid;
   }
 
   .rw-calendar-now {
@@ -75,7 +83,7 @@ $cell-select-bg: list.$selected-bg !default;
 
   .rw-cell,
   .rw-calendar-btn {
-    background-clip: $widget-background-clip;
+    background-clip: var(--rw-widget-background-clip);
 
     @include mixins.focus();
 
@@ -89,14 +97,14 @@ $cell-select-bg: list.$selected-bg !default;
 
   .rw-calendar-btn {
     line-height: 2em;
-    border-radius: $btn-border-radius;
-    border-color: $btn-border-color;
+    border-radius: var(--rw-btn-border-radius);
+    border-color: var(--rw-btn-border-color);
 
     &:hover {
-      background-color: $btn-hover-bg;
+      background-color: var(--rw-btn-hover-bg);
     }
     &:active {
-      background-color: $btn-active-bg;
+      background-color: var(--rw-btn-active-bg);
     }
   }
 
@@ -134,12 +142,12 @@ $cell-select-bg: list.$selected-bg !default;
     display: table;
     outline: none;
     height: 14em;
-    padding: $widget-focus-width;
+    padding: var(--rw-widget-focus-width);
     table-layout: fixed;
     border-collapse: separate;
     border-spacing: 0;
     width: 100%;
-    background-color: $bg;
+    background-color: var(--rw-bg);
   }
   .rw-calendar-head {
     display: table-header-group;
@@ -154,44 +162,44 @@ $cell-select-bg: list.$selected-bg !default;
 
   .rw-head-cell {
     display: table-cell;
-    text-align: $cell-align;
-    border-bottom: 1px solid $input-border-color;
-    padding: $cell-padding;
+    text-align: var(--rw-cell-align);
+    border-bottom: 1px solid var(--rw-input-border-color);
+    padding: var(--rw-cell-padding);
   }
 
   .rw-cell {
     display: table-cell;
-    color: $cell-color;
+    color: var(--rw-cell-color);
     vertical-align: middle;
-    border-color: $cell-border-color;
-    border-radius: $cell-border-radius;
+    border-color: var(--rw-cell-border-color);
+    border-radius: var(--rw-cell-border-radius);
     cursor: pointer;
     line-height: normal;
     text-align: center;
     border: 1px solid transparent;
-    padding: $cell-padding;
+    padding: var(--rw-cell-padding);
     outline: none;
 
     &:hover {
-      background-color: $cell-hover-bg;
+      background-color: var(--rw-cell-hover-bg);
     }
     &:active {
-      background-color: $cell-active-bg;
+      background-color: var(--rw-cell-active-bg);
     }
 
     &.rw-state-selected {
-      background-color: $cell-select-bg;
-      border-color: $cell-select-border-color;
-      color: $cell-select-color;
+      background-color: var(--rw-cell-select-bg);
+      border-color: var(--rw-cell-select-border-color);
+      color: var(--rw-cell-select-color);
     }
 
     .rw-calendar-month & {
-      text-align: $cell-align;
+      text-align: var(--rw-cell-align);
     }
   }
 
   .rw-cell-off-range {
-    color: $btn-muted-color;
+    color: var(--rw-btn-muted-color);
   }
 
   .rw-calendar-transition-group {

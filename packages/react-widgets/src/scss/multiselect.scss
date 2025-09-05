@@ -1,13 +1,24 @@
 @use './variables.scss' as *;
 @use './mixins.scss';
 
+:root {
+  --rw-multiselect-tag-color: null;
+  --rw-multiselect-tag-border-color: var(--rw-gray-300);
+  --rw-multiselect-tag-bg: var(--rw-gray-300);
+  --rw-multiselect-tag-btn-bg: null;
+  --rw-multiselect-tag-btn-border-color: null;
+  --rw-multiselect-tag-btn-color: null;
+  --rw-multiselect-tag-btn-hover-bg: null;
+  --rw-multiselect-tag-btn-hover-border-color: null;
+  --rw-multiselect-tag-btn-hover-color: null;
+  --rw-multiselect-tag-btn-active-bg: null;
+  --rw-multiselect-tag-btn-active-border-color: null;
+  --rw-multiselect-tag-btn-active-color: null;
+}
+
 $gutter-pt: 0.115 !default;
 $tag-padding-left: 0.35em !default;
 $tag-padding-right: 0.35em !default;
-
-$tag-color: null !default;
-$tag-border-color: $gray-300 !default;
-$tag-bg: $gray-300 !default;
 
 $tag-height-pt: 1 - ($gutter-pt * 2) !default;
 $tag-gutter: calc(
@@ -18,18 +29,6 @@ $tag-border-radius: 3px !default;
 
 $tag-btn-padding-y: 0 !default;
 $tag-btn-padding-x: 0.35em !default;
-
-$tag-btn-bg: null !default;
-$tag-btn-border-color: null !default;
-$tag-btn-color: null !default;
-
-$tag-btn-hover-bg: null !default;
-$tag-btn-hover-border-color: null !default;
-$tag-btn-hover-color: null !default;
-
-$tag-btn-active-bg: null !default;
-$tag-btn-active-border-color: null !default;
-$tag-btn-active-color: null !default;
 
 @mixin Multiselect() {
   .rw-multiselect {
@@ -65,13 +64,13 @@ $tag-btn-active-color: null !default;
 
   .rw-multiselect-tag {
     display: inline-flex;
-    color: $tag-color;
+    color: var(--rw-multiselect-tag-color);
     margin-left: $tag-gutter;
     margin-top: $tag-gutter;
     min-height: $tag-height;
     border-radius: $tag-border-radius;
-    background-color: $tag-bg;
-    border: if($tag-border-color, 1px solid $tag-border-color, null);
+    background-color: var(--rw-multiselect-tag-bg);
+    border: if(var(--rw-multiselect-tag-border-color), 1px solid var(--rw-multiselect-tag-border-color), null);
     // reset the text selection cursor on the parent
     cursor: default;
     max-width: 100%;
@@ -111,19 +110,19 @@ $tag-btn-active-color: null !default;
     align-self: stretch;
 
     padding: $tag-btn-padding-y $tag-btn-padding-x;
-    color: $tag-btn-color;
-    border-color: $tag-btn-border-color;
-    background-color: $tag-btn-bg;
+    color: var(--rw-multiselect-tag-btn-color);
+    border-color: var(--rw-multiselect-tag-btn-border-color);
+    background-color: var(--rw-multiselect-tag-btn-bg);
 
     &:hover {
-      color: $tag-btn-hover-color;
-      border-color: $tag-btn-hover-border-color;
-      background-color: $tag-btn-hover-bg;
+      color: var(--rw-multiselect-tag-btn-hover-color);
+      border-color: var(--rw-multiselect-tag-btn-hover-border-color);
+      background-color: var(--rw-multiselect-tag-btn-hover-bg);
     }
     &:active {
-      color: $tag-btn-active-color;
-      background-color: $tag-btn-active-bg;
-      border-color: $tag-btn-active-border-color;
+      color: var(--rw-multiselect-tag-btn-active-color);
+      background-color: var(--rw-multiselect-tag-btn-active-bg);
+      border-color: var(--rw-multiselect-tag-btn-active-border-color);
     }
 
     &:focus {
