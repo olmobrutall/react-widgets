@@ -106,7 +106,7 @@
 
 .rw-widget {
   border: none;
-  color: $widget-color;
+  color: var(--rw-widget-color);
   font-weight: $widget-font-weight;
   font-size: $widget-font-size;
   font-family: $widget-font-family;
@@ -133,8 +133,8 @@ fieldset[disabled] .rw-widget {
   display: grid;
   overflow: hidden;
   min-height: $input-height;
-  background-color: $input-bg;
-  border: $input-border-color $input-border-width solid;
+  background-color: var(--rw-input-bg);
+  border: var(--rw-input-border-color) $input-border-width solid;
   border-radius: $input-border-radius;
   outline: none;
   grid-template: 1fr / 1fr $input-addon-width;
@@ -146,9 +146,9 @@ fieldset[disabled] .rw-widget {
   }
 
   .rw-state-focus & {
-    color: $input-focus-color;
-    background-color: $input-focus-bg;
-    border-color: $input-focus-border-color;
+    color: var(--rw-input-focus-color);
+    background-color: var(--rw-input-focus-bg);
+    border-color: var(--rw-input-focus-border-color);
     box-shadow: $widget-focus-box-shadow;
     transition: if($widget-focus-box-shadow, $widget-focus-transition, null);
 
@@ -180,8 +180,8 @@ fieldset[disabled] .rw-widget {
 // This class represents the abstract container that is the "input" of any
 // given widget
 .rw-widget-input {
-  color: $input-color;
-  background-color: $input-bg;
+  color: var(--rw-input-color);
+  background-color: var(--rw-input-bg);
   box-shadow: $input-box-shadow;
   background-clip: $widget-background-clip;
   width: inherit;
@@ -190,18 +190,18 @@ fieldset[disabled] .rw-widget {
   &.rw-state-disabled,
   .rw-state-disabled &,
   fieldset[disabled] & {
-    color: $input-disabled-color;
-    background-color: $input-disabled-bg;
-    border-color: $input-disabled-border-color;
+    color: var(--rw-input-disabled-color);
+    background-color: var(--rw-input-disabled-bg);
+    border-color: var(--rw-input-disabled-border-color);
   }
 }
 
 .rw-placeholder,
 .rw-input::placeholder {
-  color: $input-placeholder-color;
+  color: var(--rw-input-placeholder-color);
 
   .rw-state-disabled & {
-    color: $input-disabled-placeholder-color;
+    color: var(--rw-input-disabled-placeholder-color);
   }
 }
 
@@ -223,7 +223,7 @@ fieldset[disabled] .rw-widget {
 
 .rw-webkit-autofill .rw-widget-container,
 .rw-input:-webkit-autofill {
-  background-color: $input-autofill-bg !important;
+  background-color: var(--rw-input-autofill-bg) !important;
   background-image: none !important;
-  color: $input-autofill-color !important;
+  color: var(--rw-input-autofill-color) !important;
 }

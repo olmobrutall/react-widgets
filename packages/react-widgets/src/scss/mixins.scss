@@ -54,12 +54,12 @@
 }
 
 @mixin input-base {
-  caret-color: $input-caret-color;
+  caret-color: var(--rw-input-caret-color);
 
   &:disabled {
     // For safari, which seems to ignore color on disabled inputs
     // opacity for IOS
-    -webkit-text-fill-color: $input-disabled-color;
+    -webkit-text-fill-color: var(--rw-input-disabled-color);
     opacity: 1;
   }
 }
